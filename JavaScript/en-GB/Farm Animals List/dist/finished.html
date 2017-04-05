@@ -4,22 +4,22 @@
             var animals = [ "sheep", "cow", "pig", "horse" ]
 
             function displayAnimals() {
-                var body = document.getElementById("animals");
+                var container = document.getElementById("animal-container");
                 for (var index = 0; index < animals.length; index++) {
                     var div = document.createElement('div');
+
                     div.style.width = 200
-                    ///div.style.cssFloat = "left"
                     div.style.display = "inline-block"
-                    div.style.alignContent = "center"
+
                     div.innerHTML = animals[index];
-                    body.appendChild(div);
+                    container.appendChild(div);
                 }
 
             }
         </script>
     </head>
     <body onload="displayAnimals()">
-        <div id="animals">
+        <div id="animal-container">
         </div>
     </body>
 </html>

@@ -146,14 +146,14 @@ for (var index = 0; index < animals.length; index++) {
 ```
 
 In the above code we are we have created a loop block that will start at the begining of our animal array <b>(remember arrays are 0 based)</b> that will continue while the index varible is less the length of our animal array<br>
-<b>Note:</b> Here we are using the <i>Array.length</i> property, you can read more about the property [here]()
+<b>Note:</b> Here we are using the <i>Array.length</i> property, you can read more about the property [here](https://www.w3schools.com/js/js_arrays.asp)
 
 So now we have a nice alert box displaying our animals one by one but our page is still blank, it would be nice to display our animals on our page.
 
 # Displaying animals on the page
 
 Now lets change our `displayAnimals` function again, this time we are going to use something call the <b>Document Object Model</b> or <b>DOM</b> to add HTML elements to our page.<br>
-<b>Note:</b> You can read more about the Document Object Model [here]()
+<b>Note:</b> You can read more about the Document Object Model [here](https://www.w3schools.com/js/js_htmldom.asp)
 
 The first piece of code that we are going to add will get the `<body>` element of our page and store that in a varible.<br>
 Type this code as the first line of our `displayAnimals` function.
@@ -165,7 +165,7 @@ function displayAnimals() {
 ```
 
 It the above code, we are getting the main `<body> element of our page and storing it into a varible<br>
-<b>Note:</b> You can read more about the <b>document.body</b> [here]()
+<b>Note:</b> You can read more about the <b>document.body</b> [here](https://www.w3schools.com/jsref/prop_doc_body.asp)
 
 Now that we have the `<body>` tag stored as a varible, we can now add code inside our <i>for loop</i> that will use this varible and add our animals to it.<br>
 
@@ -183,7 +183,37 @@ Lastly we are adding our created element to the body element of our document.
 
 ## Add structure
 
+So now we're almost there, let's just add a little bit of structure to our page to make it look better.
 
+Let's add a divison (`<div>`) element just inside our `<body>`, we will also give this element an ID so that we can reference it from inside our JavaScript function<br>
+Because our `<div>` is a container for all our animals to go into, what would be a good name for our animal container?<br>
+That's right let's call it "animal-container"!
+
+```
+<body>
+    <div id="animal-container">
+    </div>
+</body>
+```
+
+So now we have a place to put all our animals, let's change our function to reference this element.<br>
+In our code, we can replace the statement `var body = document.body;` with `var container = document.getElementById("animal-container");`<br>
+<b>Note:</b> I have also renamed he varible to be called "container", as this is more sencible now that we are not using the <body>, make sure you rename the varible in all places that it is used.
+
+Okay one last thing, let's now give the `<div>` that we are creating some style!<br>
+Type this code after we create the `<div>` element:
+
+```
+div.style.width = 200
+div.style.display = "inline-block"
+```
+
+Can you guess what the above code is doing?<br>
+Well the first line is simple, we are setting the width to be 200.<br>
+The next line isn't so straight forward, we are changing the `<div>` to display as a block.
+
+You can fin out more about [style.with here](https://www.w3schools.com/jsref/prop_style_width.asp).<br>
+And more about [style.display here](https://www.w3schools.com/jsref/prop_style_display.asp).
 
 # End of lesson
 
