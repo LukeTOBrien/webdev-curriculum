@@ -69,12 +69,13 @@ var animals = [
 ];
 ```
 
-Now that we have added the images to our objects, we can now change our code to display the images instead of the name of the animal.
+Now that we have added the images to our objects, we can now change our code to display the images instead of the name of the animal.<br>
+Replace the statement `div.innerHTML...` with the following code:
 
 ```
 var img = document.createElement('img');
-div.style.width = 200
-div.style.display = "inline-block"
+img.src = animals[index].img;
+div.appendChild(img);
 ```
 
 # End of lesson
