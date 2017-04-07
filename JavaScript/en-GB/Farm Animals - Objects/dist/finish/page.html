@@ -1,17 +1,31 @@
 <html>
     <head>
         <script>
-            var animals = [ "sheep", "cow", "pig", "horse" ]
+            var animals = [
+    { name : "sheep", img : "img/sheep.png" },
+    { name : "cow", img : "img/cow.png" },
+    { name : "pig", img : "img/pig.png" },
+    { name : "horse", img : "img/horse.png" }
+];
 
             function displayAnimals() {
                 var container = document.getElementById("animal-container");
                 for (var index = 0; index < animals.length; index++) {
+                    var animal = animals[index];
                     var div = document.createElement('div');
 
                     div.style.width = 200
                     div.style.display = "inline-block"
 
-                    div.innerHTML = animals[index];
+                    var img = document.createElement("img");
+                    img.src = animals[index].img;
+
+                    img.addEventListener("click", function(event) {
+                        alert(animal.name)
+                    });
+
+                    div.appendChild(img);
+
                     container.appendChild(div);
                 }
 
