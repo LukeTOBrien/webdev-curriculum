@@ -78,6 +78,40 @@ img.src = animals[index].img;
 div.appendChild(img);
 ```
 
+Here we are creating a `<img>` element which we are adding to our already created `<div>` element.<br>
+We are using the <b>img</b> property to set the source (`src`) of the image to display that animal.<br>
+Read about the (img element here)[https://www.w3schools.com/jsref/dom_obj_image.asp]
+
+# Click event
+
+Next let's add a event to each animal so that when it is clicked upon it's name will appear in a alert box<br>
+First of all we want to create a new varible that we will store the animal into:
+
+```
+var animal = animals[index];
+```
+
+In the above statement we are retrieving the animal from the array using the index and storing it in a new varible called <b>animal</b>.<br>
+Now we have the animal stored in a new varible we can add our click event.<br>
+A `function` that is called when an event happens is called a <b>handler</b>, we can add a new handler to a element using the <b>addEventListener</b> function.<br>
+You can read more about the [addEventListener function here](https://www.w3schools.com/js/js_htmldom_eventlistener.asp)
+
+```
+img.addEventListener("click", function(event) {
+    alert(animal.name)
+});
+```
+
+## Something is wrong
+
+If we now save our page and refresh our browser we can see that something is wrong.<br>
+Every animal that we click on displays an alert that say "horse".<br>
+This isn't right, not every animal is a horse, so what is going on?
+
+When our page load the `displayAnimals` function is called, then inside this function the <b>for loop</b> is performed.<br>
+Some time later we click on an animal and the click event handler if called.<br>
+Because the <b>for loop</b> has now completed, the animal varible is still set to the last animal in the array.
+
 # End of lesson
 
 Phew so that's the end of this lesson, in the next lesson we will add to our webpage to make it more colourful and interesting, for now just relax and let what we have learnt sink in.
