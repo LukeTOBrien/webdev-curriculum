@@ -112,6 +112,43 @@ When our page load the `displayAnimals` function is called, then inside this fun
 Some time later we click on an animal and the click event handler if called.<br>
 Because the <b>for loop</b> has now completed, the animal varible is still set to the last animal in the array.
 
+// TODO image for error
+
+## How to solve
+
+What we need to do is to pass the animal varible to the event hadler each time the <b>for loop</b> runs.<br>
+But how pass data to the event handler?
+
+We can do that by using a JavaScript library called <b>jQuery</b>.<br>
+jQuery is a library that makes using JavaScript a lot more simpler, we can do more complex thing that just would not be possible for us to do without it.<br>
+More spefificly, we are going to use a jQuery function called <b>on</b>.<br>
+<b>Note:</b> You can [read about the on function here](http://api.jquery.com/on/)
+
+The first thing we have to do is to add a `<script>` tag for jQuery in the `<head>` section of our page:
+
+```
+<head>
+    <script src="js/jquery.js"></script>
+    ...
+</head>
+```
+
+Here we have told our browser that we wish to load jQuery.<br>
+<b>Note:</b> Here the file `jquery.js` is inside a folder called `js`, if you do not have the file you could change the `src` attribute to https://code.jquery.com/jquery-3.2.0.min.js
+
+Now we have added jQuery, let's change the event handler to use the <b>on</b> function.
+
+```
+$(img).on("click", { animal : animal }, function(event) {
+    alert(event.data.animal.name)
+});
+```
+
+The main difference we can see with the code above is that we are creating an object with a property called animal that we are passing into our event handler.<br>
+We then use the object `event.data` from inside our event handler to retrive the animal object.
+
+
+
 # End of lesson
 
 Phew so that's the end of this lesson, in the next lesson we will add to our webpage to make it more colourful and interesting, for now just relax and let what we have learnt sink in.
