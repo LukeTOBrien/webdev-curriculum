@@ -144,8 +144,46 @@ $(img).on("click", { animal : animal }, function(event) {
 });
 ```
 
+We can see her that now we are using the function called `on` instead of `addEventListener` and we are also using special sympols `$()` the wrap around our `<img>` varible.<br>
+The reason that we wrap our img varible in special sympols is because `on` is a jQuery function, so we must make our img into a jQuery object by typing `$(img)`.<br>
 The main difference we can see with the code above is that we are creating an object with a property called animal that we are passing into our event handler.<br>
 We then use the object `event.data` from inside our event handler to retrive the animal object.
+
+# Tidy up
+
+## Using jQuery
+
+So now we are using jQuery in one place only, but we could use it everywhere and it would make our life easier.<br>
+Let's now change the `displayAnimals` function to use jQuery.
+
+```
+function displayAnimals() {
+    var container = $("#animal-container");
+    for (var index = 0; index < animals.length; index++) {
+        var animal = animals[index];
+        var div = $('<div/>');
+
+        var img = $("<img/>");
+        img[0].src = animals[index].img;
+
+        img.on("click", { animal : animal }, function(event) {
+            alert(event.data.animal.name)
+        });
+
+        div.append(img);
+
+        container.append(div);
+    }
+}
+```
+
+So now we can see how jQuery has made things easier for us, instead of using functions from the `document` object, we can simply wrap strings of text using the special symbols `$()`.<br>
+Actually, what goes inside the special symbols is called a <i>Selector</i>.<br>
+You can read more about [jQuery selectors here](https://www.w3schools.com/jquery/jquery_selectors.asp)
+
+The one bit of code that might confusse you is that we are using an array index when assigning the src property of our img `img[0].src = ...`.<br>
+
+#
 
 
 

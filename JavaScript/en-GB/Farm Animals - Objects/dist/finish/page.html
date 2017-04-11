@@ -9,24 +9,24 @@
 ];
 
             function displayAnimals() {
-                var container = document.getElementById("animal-container");
+                var container = $("#animal-container");
                 for (var index = 0; index < animals.length; index++) {
                     var animal = animals[index];
-                    var div = document.createElement('div');
+                    var div = $('<div/>');
 
-                    div.style.width = 200
-                    div.style.display = "inline-block"
+                    div[0].style.width = 200
+                    div[0].style.display = "inline-block"
 
-                    var img = document.createElement("img");
-                    img.src = animals[index].img;
+                    var img = $("<img/>");
+                    img[0].src = animals[index].img;
 
-                    img.addEventListener("click", function(event) {
-                        alert(animal.name)
+                    img.on("click", { animal : animal }, function(event) {
+                        alert(event.data.animal.name)
                     });
 
-                    div.appendChild(img);
+                    div.append(img);
 
-                    container.appendChild(div);
+                    container.append(div);
                 }
 
             }
