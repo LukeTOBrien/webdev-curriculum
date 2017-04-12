@@ -151,6 +151,8 @@ We then use the object `event.data` from inside our event handler to retrive the
 
 # Tidy up
 
+In the world of computer programming, tidying up or reorganising code is called <b>Refactoring</b> (but this is just a posh word for tidying up).
+
 ## Using jQuery
 
 So now we are using jQuery in one place only, but we could use it everywhere and it would make our life easier.<br>
@@ -182,8 +184,39 @@ Actually, what goes inside the special symbols is called a <i>Selector</i>.<br>
 You can read more about [jQuery selectors here](https://www.w3schools.com/jquery/jquery_selectors.asp)
 
 The one bit of code that might confusse you is that we are using an array index when assigning the src property of our img `img[0].src = ...`.<br>
+This is because the jQuery object is actually an array of elements, so we use a index to access the first element (rember array's start from 0).<br>
+You can also notice that I have removed the lines of code that give syle to our `<div>`, I've done that so that we can we can add them again late using a stylesheet.
 
-#
+## Stylesheet
+
+In the world of Web, a stylesheet is called a <b>CSS</b> file.<br>
+We have a blank CSS file all ready for us, let's now type some style rules!
+
+```
+#animal-container > div {
+    display: block;
+    width: 200px;
+}
+```
+
+In the above style rule we are doing exactly the same as what we where doing in our code.<br>
+We are saying that any `<div>` element that is below (`>`) the `animal-container` should display itself as a block and have a width of 200 pixels (a pixel is a unit of measurement used by computers).
+
+Now that we have our stylesheet, let's add it to our page.<br>
+Add the following just below the `<head>` element in our page.
+
+```
+<link rel="stylesheet" type="text/css" href="styles.css">
+```
+
+Here we are saying that we wish to link to a stylesheet that is a text CSS file that is located in the file "styles.css".
+<b>Note:</b> You can read more about the [`<link>` element here](https://www.w3schools.com/tags/tag_link.asp)
+
+## Moving script
+
+Let's now move some more of our code.<br>
+Inside the `js` folder there are two more blank files, `animals.js` and `script.js`, these files end with `.js` which stands for `JavaScript`.<br>
+Let's 
 
 
 
