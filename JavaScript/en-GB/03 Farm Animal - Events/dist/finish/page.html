@@ -1,6 +1,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <script src="js/jquery.js"></script>
         <script>
             var animals = [
     { name : "sheep", img : "img/sheep.png" },
@@ -15,15 +16,14 @@
                     var animal = animals[index];
                     var div = $('<div/>');
 
-                    div[0].style.width = 200
-                    div[0].style.display = "inline-block"
+                    div.on("click", { animal : animal }, function(event) {
+                        var isSelected = event.data.animal.isSelected;
+                        event.data.animal.isSelected = ! isSelected;
+                        $(this).toggleClass('selected');
+                    });
 
                     var img = $("<img/>");
                     img[0].src = animals[index].img;
-
-                    img.on("click", { animal : animal }, function(event) {
-                        alert(event.data.animal.name)
-                    });
 
                     div.append(img);
 
