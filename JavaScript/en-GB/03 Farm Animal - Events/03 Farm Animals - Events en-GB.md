@@ -87,10 +87,21 @@ Change your `click` event to the following code:
 
 ```
 div.on("click", { animal : animal }, function(event) {
-    event.data.animal.isSelected = true;
+    var animal = event.data.animal;
+    var isSelected = animal.isSelected;
+    animal.isSelected = ! isSelected;
     $(this).toggleClass('selected');
 });
 ```
+
+Wow, now doesn't that look complicated?<br>
+Let's break each line down to see what it is doing<br>
+- 1) Firstly we are getting the animal from our event data and then assigning it to a new varible called `animal`
+- 2) Next we get the animals `isSelected` property and put that into a new varible too. This varible will tell us wheather or not the animal is selected.
+- 3) Now we set the animal's isSelected property to be the oposite of whatever our varible is.
+The `!` symbol means `not`.
+- 4) The special symbol `this` is a varible points to the the object that is calling the event, because our varible `div` is triggering the event, `this` points to our `div` varible
+
 
 # Tidy up
 

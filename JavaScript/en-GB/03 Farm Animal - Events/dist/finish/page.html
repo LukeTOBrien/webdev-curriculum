@@ -17,8 +17,9 @@
                     var div = $('<div/>');
 
                     div.on("click", { animal : animal }, function(event) {
-                        var isSelected = event.data.animal.isSelected;
-                        event.data.animal.isSelected = ! isSelected;
+                        var animal = event.data.animal;
+                        var isSelected = animal.isSelected;
+                        animal.isSelected = ! isSelected;
                         $(this).toggleClass('selected');
                     });
 
