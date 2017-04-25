@@ -21,17 +21,16 @@ function displayAnimals() {
 }
 
 function GetSelectedAnimal() {
-    return animals.find(function(animal) { animal.isSelected });
+    return animals.find(function(animal) { return animal.isSelected });
 }
 
 function displayAnimalLocation() {
     var animal = GetSelectedAnimal();
 
-    var div = $("<div />");
-    div.appendTo($("#output"));
+    var output = $("#output");
             // Create a map object and specify the DOM element for display.
-        var map = new google.maps.Map(div[0], {
-          center: {lat: -34.397, lng: 150.644},
+        var map = new google.maps.Map(output[0], {
+          center: animal.location,
           scrollwheel: false,
           zoom: 8
         });
