@@ -21,7 +21,9 @@ function displayAnimals() {
 }
 
 function GetSelectedAnimal() {
-    return animals.find(function(animal) { return animal.isSelected });
+    return animals.find(function(animal) {
+        return animal.isSelected
+    });
 }
 
 function displayAnimalLocation() {
