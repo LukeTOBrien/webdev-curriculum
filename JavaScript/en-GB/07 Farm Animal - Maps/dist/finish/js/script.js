@@ -26,14 +26,16 @@ function GetSelectedAnimal() {
     });
 }
 
-function displayAnimalLocation() {
-    var animal = GetSelectedAnimal();
-
+function displaySelectedAnimalOnMap(selectedAnimal) {
     var output = $("#output");
-            // Create a map object and specify the DOM element for display.
-        var map = new google.maps.Map(output[0], {
-          center: animal.location,
-          scrollwheel: false,
-          zoom: 8
-        });
+    var map = new google.maps.Map(output[0], {
+        center: animal.location,
+        scrollwheel: false,
+        zoom: 8
+    });
+}
+
+function displayAnimalLocation() {
+    var selectedAnimal = GetSelectedAnimal();
+    displaySelectedAnimalOnMap(selectedAnimal)
 }

@@ -48,13 +48,24 @@ That is all the changes we have to make in our HTML page, now let's add the scri
 
 # Add the script
 
+Let's add a empty `displayAnimalLocation()` function that we will add code to later:
+
+```
+function displayAnimalLocation() {
+
+}
+```
+
+So now that we have our function in place, let's think about what we want to put in it.<br>
 Let's break our function down, what do we want to do?
 + 1) Get the selected animal.
-+ 2) Display it's location a map
++ 2) Display the selected animal's location a map
+
+Okay so we can see that there are two things that we want to do in our function, let's take them in turn.
 
 ## Get the selected animal
 
-Okay, so let's now create a function that we will use to get the selected animal.
+So let's now create a function that we will use to get the selected animal.
 
 ```
 function getSelectedAnimal() {
@@ -71,7 +82,44 @@ This might look a little bit complicated, we have two return statements, let's s
 + The second return statement is inside the find function, we want to find the animal that is selected, so inside the find() function we create another function that take a animal and returns it's `isSelected` property<br>
 This function will be called for every animal untill a selected animal is found.
 
-If we now save our page and refresh our browser we can see that something is wrong.<br>
+So now let's use our new function in our main function:
+
+```
+function displayAnimalLocation() {
+    var selectedAnimal = getSelectedAnimal();
+}
+```
+
+Here we are creating a new varible that is assigned to the return result of the `getSelectedAnimal()` function.<br>
+
+So that's the first part of our function done, now on to the second.
+
+## Display selected animal's location on a map
+
+Now we move on to creating the second part.<br>
+Let's also create this part as a new seperote function.<br>
+
+```
+function displaySelectedAnimalOnMap(selectedAnimal) {
+    var output = $("#output");
+    var map = new google.maps.Map(output[0], {
+        center: animal.location,
+        zoom: 8
+    });
+}
+```
+
+In this code there are two statement (two semi-colons (`;`)).<br>
+Let's take a look at what each statement is doing.<br>
+
++ In the first statement we get a reference of our "output" `<div>` element that is on our page.<br>
+Remember we do this by using the special `$()` symbol arround the ID of the element.
++ In the secound statement we are creating a [Google Maps Object](), we are giving it our "output" `<div>` element by using the special array index symbol on our varible (`output[0]`).<br>
+We are also giving the `Map()` function a configuration object that has two properties: center and zoom.<br>
+We wish to centre the map on the animal's location, so we assign the `animal.location` property to the `center` property in the configuration object.<br>
+We also set the `zoom` property because we want to zoom our map into the animal's location.<br>
+
+f we now save our page and refresh our browser we can see that something is wrong.<br>
 Every animal that we click on displays an alert that say "horse".<br>
 This isn't right, not every animal is a horse, so what is going on?
 
