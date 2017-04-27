@@ -26,16 +26,25 @@ function GetSelectedAnimal() {
     });
 }
 
-function displaySelectedAnimalOnMap(selectedAnimal) {
-    var output = $("#output");
-    var map = new google.maps.Map(output[0], {
-        center: animal.location,
-        scrollwheel: false,
-        zoom: 8
+function GetAllSelectedAnimals() {
+    return animals.filter(function(animal) {
+        return animal.isSelected
     });
 }
 
+var map;
+function displaySelectedAnimalOnMap(selectedAnimal) {
+    var output = $("#output");
+    if (! map) {
+        map = new google.maps.Map(output[0], {
+            center: animal.location,
+            zoom: 8
+        });
+    }
+}
+
 function displayAnimalLocation() {
+    map = null;
     var selectedAnimal = GetSelectedAnimal();
     displaySelectedAnimalOnMap(selectedAnimal)
 }

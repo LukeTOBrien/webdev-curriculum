@@ -29,6 +29,39 @@ Here we are saying that we want to include a new script with it's source at the 
 If you are curious, API stands for Application Programming Interface
 ```
 
+# Add each animal's location
+
+Let's add a new property to each animal, this property will be called <b>location</b> and it will be an object made up of two more properties: <b>lat</b> and <b>lng</b>:
+
+```
+location : {
+     lat : -7.477825,
+     lng : 178.679838
+}
+```
+
+But what do they mean?<br>
+Well, in geography, locations or coordinates on the earth are reprisented using two numbers called <b>latitude</b> (lat) and <b>longitude</b> (lng).<br>
+
+We can use the internet to find some coordinates.<br>
+Open up a web browser and navigate to https://www.google.co.uk/maps/<br>
+Now click on the right mouse button and a menu will appear, click on the option that says "What's here?"<br>
+Once you have clicked on the button, a window will appear at the bottom of the screen, inside this window you can see the name of the location you have clicked on, underneath the name are the latitude and longitude coordinates.<br>
+
+Now you know how to find yourown latitude and longitude coordiate, you can use yourown cooridiates or use to ones in this lesson.<br>
+Here are some example coordiates:
+
+```
+var animals = [
+    { name : "sheep", ... location : { lat : -7.477825, lng : 178.679838 } },
+    { name : "cow", ... location : { lat : 1.902488, lng : -157.365643 } },
+    { name : "pig", ... location : { lat : -17.665097, lng : 178.785795 } },
+    { name : "horse", ... location : { lat : -0.526364, lng: -90.691124 } }
+];
+```
+
+Now that we have the animal objects set up, let's move on to making a button that  will display these locations on a map.
+
 # Add a button
 
 Now let's add a button to our button panel.<br>
@@ -119,146 +152,86 @@ We are also giving the `Map()` function a configuration object that has two prop
 We wish to centre the map on the animal's location, so we assign the `animal.location` property to the `center` property in the configuration object.<br>
 We also set the `zoom` property because we want to zoom our map into the animal's location.<br>
 
-f we now save our page and refresh our browser we can see that something is wrong.<br>
-Every animal that we click on displays an alert that say "horse".<br>
-This isn't right, not every animal is a horse, so what is going on?
-
-When our page load the `displayAnimals` function is called, then inside this function the <b>for loop</b> is performed.<br>
-Some time later we click on an animal and the click event handler if called.<br>
-Because the <b>for loop</b> has now completed, the animal varible is still set to the last animal in the array.
-
-// TODO image for error
-
-## How to solve
-
-What we need to do is to pass the animal varible to the event hadler each time the <b>for loop</b> runs.<br>
-But how pass data to the event handler?
-
-We can do that by using a JavaScript library called <b>jQuery</b>.<br>
-jQuery is a library that makes using JavaScript a lot more simpler, we can do more complex thing that just would not be possible for us to do without it.<br>
-More spefificly, we are going to use a jQuery function called <b>on</b>.<br>
-<b>Note:</b> You can [read about the on function here](http://api.jquery.com/on/)
-
-The first thing we have to do is to add a `<script>` tag for jQuery in the `<head>` section of our page:
+Now that we have created our, we can now use it in our main function.<br>
+Place the code to call our newly created function after we get our selected animal:
 
 ```
-<head>
-    <script src="js/jquery.js"></script>
-    ...
-</head>
+function displayAnimalLocation() {
+    var selectedAnimal = ...
+    displaySelectedAnimalOnMap(selectedAnimal);
+}
 ```
 
-Here we have told our browser that we wish to load jQuery.<br>
-<b>Note:</b> Here the file `jquery.js` is inside a folder called `js`, if you do not have the file you could change the `src` attribute to https://code.jquery.com/jquery-3.2.0.min.js
+Here we are calling our function and giving it our selected animal.
 
-Now we have added jQuery, let's change the event handler to use the <b>on</b> function.
+# It works!
 
-```
-$(img).on("click", { animal : animal }, function(event) {
-    alert(event.data.animal.name)
-});
-```
+Now we have created all the parts for our main function, let's save our work and open up the page in a web browser.<br>
+To test that everything is working, click on a animal to select it and then click on the "Display Location" to display a map with the selected animal's location.
 
-We can see her that now we are using the function called `on` instead of `addEventListener` and we are also using special sympols `$()` the wrap around our `<img>` varible.<br>
-The reason that we wrap our img varible in special sympols is because `on` is a jQuery function, so we must make our img into a jQuery object by typing `$(img)`.<br>
-The main difference we can see with the code above is that we are creating an object with a property called animal that we are passing into our event handler.<br>
-We then use the object `event.data` from inside our event handler to retrive the animal object.
+But there is one problem.<br>
+Not every selected animal is displayed on the map, if we select more than one animal, we would like all of the animal locations displayed on the map, not just one.
 
-## Changing a property
+Let's make the changes so that all animals are displayed.
 
-So now let's change our event so that it does something more useful then just display the animal's name, let's change our event so that the computer remebers which animal we have clicked on.<br>
-By clicking on a animal, we are choosing (or selecting) a animal, once that animal has been selected, we can then use that selected animal in other functions that we will create in later lessons.
+## Get all selected animals
 
-Change your `click` event to the following code:
+Let's create another function to get all selected animals.<br>
+Type the following code:
 
 ```
-div.on("click", { animal : animal }, function(event) {
-    var animal = event.data.animal;
-    var isSelected = animal.isSelected;
-    animal.isSelected = ! isSelected;
-    $(this).toggleClass('selected');
-});
+function getAllSelectedAnimals() {
+    return animals.filter(function(animal) {
+        return animal.isSelected
+    });
+}
 ```
 
-Wow, now doesn't that look complicated?<br>
-Let's break each line down to see what it is doing<br>
-- 1) Firstly we are getting the animal from our event data and then assigning it to a new varible called `animal`
-- 2) Next we get the animals `isSelected` property and put that into a new varible too. This varible will tell us wheather or not the animal is selected.
-- 3) Now we set the animal's isSelected property to be the oposite of whatever our varible is.
-The `!` symbol means `not`.
-- 4) The special symbol `this` is a varible that points to the the object that is calling the event, because our varible `div` is triggering the event, `this` points to our `div` varible
+This is a simple change to our previous function.<br>
+All we have done here is change the name of our function, `getAllSelectedAnimals` is a nice descriptive name, and we are now using the `filter` function of our `animals` array.<br>
+The filter function will return all the selected animals rather then just the first one it finds.<br>
+<b>Note:</b> Read more about the [filter() function here]()
 
+## Changing the displayOnMap function
 
-# Tidy up
+This change is a little bit bigger than the last.
 
-In the world of computer programming, tidying up or reorganising code is called <b>Refactoring</b> (but this is just a posh word for tidying up).
-
-## Using jQuery
-
-So now we are using jQuery in one place only, but we could use it everywhere and it would make our life easier.<br>
-Let's now change the `displayAnimals` function to use jQuery.
+The first change we want to make is to move the `map` varible outside of the `displaySelectedAnimalOnMap` function.<br>
+Then we want to add a `if` arround the `Google Map` function call.<br>
+Replace your `displaySelectedAnimalOnMap` function with the following code:
 
 ```
-function displayAnimals() {
-    var container = $("#animal-container");
-    for (var index = 0; index < animals.length; index++) {
-        var animal = animals[index];
-        var div = $('<div/>');
-
-        var img = $("<img/>");
-        img[0].src = animals[index].img;
-
-        img.on("click", { animal : animal }, function(event) {
-            alert(event.data.animal.name)
+var map;
+function displaySelectedAnimalOnMap(animal) {
+    var output = $("#output");
+    if (! map) {
+        map = new google.maps.Map(output[0], {
+            center: animal.location,
+            zoom: 8
         });
-
-        div.append(img);
-
-        container.append(div);
     }
 }
 ```
 
-So now we can see how jQuery has made things easier for us, instead of using functions from the `document` object, we can simply wrap strings of text using the special symbols `$()`.<br>
-Actually, what goes inside the special symbols is called a <i>Selector</i>.<br>
-You can read more about [jQuery selectors here](https://www.w3schools.com/jquery/jquery_selectors.asp)
+You can see that our `if` statement is saying "if not map" this means that "if the map is nothing or if map is empty", as we are not assigning anything to `map`, th `map` varible is empty.
 
-The one bit of code that might confusse you is that we are using an array index when assigning the src property of our img `img[0].src = ...`.<br>
-This is because the jQuery object is actually an array of elements, so we use a index to access the first element (rember array's start from 0).<br>
-You can also notice that I have removed the lines of code that give syle to our `<div>`, I've done that so that we can we can add them again late using a stylesheet.
+But this is not the only change that we want to make, we also want to add a marker on our map.<br>
 
-## Stylesheet
+### Add a marker
 
-In the world of Web, a stylesheet is called a <b>CSS</b> file.<br>
-We have a blank CSS file all ready for us, let's now type some style rules!
+Now let's add a marker.<br>
+We want to do this inside our function, below the `map` if statement.<br>
+Type the following code:
 
 ```
-#animal-container > div {
-    display: block;
-    width: 200px;
-}
+var marker = new google.maps.Marker({
+    position: animal.location,
+    map: map,
+    title: animal.name
+});
 ```
 
-In the above style rule we are doing exactly the same as what we where doing in our code.<br>
-We are saying that any `<div>` element that is below (`>`) the `animal-container` should display itself as a block and have a width of 200 pixels (a pixel is a unit of measurement used by computers).
-
-Now that we have our stylesheet, let's add it to our page.<br>
-Add the following just below the `<head>` element in our page.
-
-```
-<link rel="stylesheet" type="text/css" href="styles.css">
-```
-
-Here we are saying that we wish to link to a stylesheet that is a text CSS file that is located in the file "styles.css".
-<b>Note:</b> You can read more about the [`<link>` element here](https://www.w3schools.com/tags/tag_link.asp)
-
-## Moving script
-
-Let's now move some more of our code.<br>
-Inside the `js` folder there are two more blank files, `animals.js` and `script.js`, these files end with `.js` which stands for `JavaScript`.<br>
-Let's 
-
-
+https://developers.google.com/maps/documentation/javascript/examples/marker-simple
 
 # End of lesson
 
