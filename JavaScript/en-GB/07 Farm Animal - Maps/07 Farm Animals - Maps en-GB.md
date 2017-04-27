@@ -224,6 +224,9 @@ We want to do this inside our function, below the `map` if statement.<br>
 Type the following code:
 
 ```
+if (! map) {
+    ...
+}
 var marker = new google.maps.Marker({
     position: animal.location,
     map: map,
@@ -231,7 +234,32 @@ var marker = new google.maps.Marker({
 });
 ```
 
-https://developers.google.com/maps/documentation/javascript/examples/marker-simple
+In this code above we are adding a new [Google Map Marker](https://developers.google.com/maps/documentation/javascript/examples/marker-simple).<br>
+The Marker object also takes a configuration object, we are setting the congfiguration object's properties using the animal's location and name, we are also telling the Marker that the map we want to use is our `map` varible.<br>
+
+The last thing we have to do is make changes to our main `displayAnimalLocation` function.
+
+## Changes to displayAnimalLocation function
+
+We are now going to make three changes to our main function.<br>
+Let's look at the following code:<br>
+
+```
+function displayAnimalLocation() {
+    map = null;
+    var selectedAnimals = GetAllSelectedAnimals();
+    selectedAnimals.forEach(displaySelectedAnimalOnMap);
+}
+```
+
+Our function is now made up of three statements:
+
++ 1) We are making sure the `map` varible is nothing (null in computer terms) by assign the special keyword 'null' to it.
++ 2) We are getting all the selected animals by calling our new function that returns all selected animals.
++ 3) We are calling the `forEach()` function of the `selectedAnimals` array.<br>
+<b>Note:</b> Read more about the [forEach function here](https://www.w3schools.com/jsref/jsref_forEach.asp)
+
+
 
 # End of lesson
 

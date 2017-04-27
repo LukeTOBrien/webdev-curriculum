@@ -33,7 +33,7 @@ function GetAllSelectedAnimals() {
 }
 
 var map;
-function displaySelectedAnimalOnMap(selectedAnimal) {
+function displaySelectedAnimalOnMap(animal) {
     var output = $("#output");
     if (! map) {
         map = new google.maps.Map(output[0], {
@@ -41,10 +41,15 @@ function displaySelectedAnimalOnMap(selectedAnimal) {
             zoom: 8
         });
     }
+    var marker = new google.maps.Marker({
+        position: animal.location,
+        map: map,
+        title: animal.name
+    });
 }
 
 function displayAnimalLocation() {
     map = null;
-    var selectedAnimal = GetSelectedAnimal();
-    displaySelectedAnimalOnMap(selectedAnimal)
+    var selectedAnimal = GetAllSelectedAnimals();
+    selectedAnimal.forEach(displaySelectedAnimalOnMap);
 }
