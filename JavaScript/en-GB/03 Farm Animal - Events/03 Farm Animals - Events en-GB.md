@@ -141,9 +141,9 @@ The one bit of code that might confusse you is that we are using an array index 
 This is because the jQuery object is actually an array of elements, so we use a index to access the first element (rember array's start from 0).<br>
 You can also notice that I have removed the lines of code that give syle to our `<div>`, I've done that so that we can we can add them again late using a stylesheet.
 
-## Stylesheet
+## Styling our page
 
-In the world of Web, a stylesheet is called a <b>CSS</b> file.<br>
+The way we add style to our page is but creating <b>style rules</b> inside a <b>stylesheet</b>, a stylesheet is saved in a special file called a <b>CSS</b> file.<br>
 We have a blank CSS file all ready for us, let's now type some style rules!
 
 ```
@@ -163,7 +163,7 @@ Add the following just below the `<head>` element in our page.
 <link rel="stylesheet" type="text/css" href="styles.css">
 ```
 
-Here we are saying that we wish to link to a stylesheet that is a text CSS file that is located in the file "styles.css".
+Here we are saying that we wish to link to a stylesheet that is a text CSS file that is located in the file "styles.css".<br>
 <b>Note:</b> You can read more about the [`<link>` element here](https://www.w3schools.com/tags/tag_link.asp)
 
 ## Moving script
