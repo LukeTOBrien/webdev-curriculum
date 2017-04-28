@@ -230,7 +230,7 @@ if (! map) {
 var marker = new google.maps.Marker({
     position: animal.location,
     map: map,
-    title: animal.name
+    label: animal.name
 });
 ```
 
@@ -257,9 +257,8 @@ Our function is now made up of three statements:
 + 1) We are making sure the `map` varible is nothing (null in computer terms) by assign the special keyword 'null' to it.
 + 2) We are getting all the selected animals by calling our new function that returns all selected animals.
 + 3) We are calling the `forEach()` function of the `selectedAnimals` array.<br>
+The `forEach` function does exactly the same as a `for...loop`, only it is easier to understand because it is a function.
 <b>Note:</b> Read more about the [forEach function here](https://www.w3schools.com/jsref/jsref_forEach.asp)
-
-
 
 # End of lesson
 

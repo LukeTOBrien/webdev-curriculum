@@ -20,18 +20,21 @@ function displayAnimals() {
     }
 }
 
-function GetSelectedAnimal() {
+function getSelectedAnimal() {
     return animals.find(function(animal) {
         return animal.isSelected
     });
 }
 
-function GetAllSelectedAnimals() {
+function getAllSelectedAnimals() {
     return animals.filter(function(animal) {
         return animal.isSelected
     });
 }
 
+/*
+ * Display Animal on Map
+ */
 var map;
 function displaySelectedAnimalOnMap(animal) {
     var output = $("#output");
@@ -44,12 +47,12 @@ function displaySelectedAnimalOnMap(animal) {
     var marker = new google.maps.Marker({
         position: animal.location,
         map: map,
-        title: animal.name
+        label: animal.name
     });
 }
 
 function displayAnimalLocation() {
     map = null;
-    var selectedAnimal = GetAllSelectedAnimals();
+    var selectedAnimal = getAllSelectedAnimals();
     selectedAnimal.forEach(displaySelectedAnimalOnMap);
 }
