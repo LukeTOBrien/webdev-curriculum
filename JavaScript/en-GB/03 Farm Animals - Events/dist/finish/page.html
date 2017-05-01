@@ -1,6 +1,11 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="styles.css">
+        <style>
+            #animal-container > div.selected {
+                width: 200px;
+                border: red solid;
+            }
+        </style>
         <script src="js/jquery.js"></script>
         <script>
             var animals = [
@@ -11,24 +16,27 @@
 ];
 
             function displayAnimals() {
-                var container = $("#animal-container");
+                var container = document.getElementById("animal-container");
                 for (var index = 0; index < animals.length; index++) {
                     var animal = animals[index];
-                    var div = $('<div/>');
+                    var div = document.createElement('div');
 
-                    div.on("click", { animal : animal }, function(event) {
+                    div.style.width = 200
+                    div.style.display = "inline-block"
+
+                    $(div).on("click", { animal : animal }, function(event) {
                         var animal = event.data.animal;
                         var isSelected = animal.isSelected;
                         animal.isSelected = ! isSelected;
                         $(this).toggleClass('selected');
                     });
 
-                    var img = $("<img/>");
-                    img[0].src = animals[index].img;
+                    var img = document.createElement('img');
+                    img.src = animal.img;
 
-                    div.append(img);
+                    div.appendChild(img);
 
-                    container.append(div);
+                    container.appendChild(div);
                 }
 
             }

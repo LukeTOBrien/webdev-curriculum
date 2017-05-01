@@ -5,6 +5,5 @@
 
 #animal-container > div.selected {
     width: 200px;
-    display: block;
     border: red solid;
 }

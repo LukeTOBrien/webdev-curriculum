@@ -35,16 +35,18 @@ function getAllSelectedAnimals() {
 /*
  * Display Animal's favourite video'
  */
-var map;
 function displaySelectedAnimalFavouriteVideo(animal) {
     var output = $("#output");
 
     var video = $("<video />");
-    var src = $("<source />");
+    video[0].controls = true;
+    video[0].src = animal.video;
     
+    output.append(video);
 }
 
 function displayFavouriteVideo() {
+    $("#output").empty();
     var selectedAnimal = getAllSelectedAnimals();
-    selectedAnimal.forEach(displaySelectedAnimalOnMap);
+    selectedAnimal.forEach(displaySelectedAnimalFavouriteVideo);
 }

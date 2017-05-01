@@ -11,9 +11,9 @@ stylesheet: web
 
 Our farm animals at not just confined to one farm, but they live in many different locations all over the world.
 
-In this lesson we will add a <b>location</b> property to our animals and display their locations on a map.<br>
+In this lesson we will add a __location__ property to our animals and display their locations on a map.<br>
 There are many diffent maps on the internet, but we are going to be using Google Maps.<br>
-<b>Note:</b> You can read about [Google Maps here](https://www.w3schools.com/graphics/google_maps_intro.asp)
+__Note:__ You can read about [Google Maps here](https://www.w3schools.com/graphics/google_maps_intro.asp)
 
 # Reference Google Maps
 
@@ -31,7 +31,7 @@ If you are curious, API stands for Application Programming Interface
 
 # Add each animal's location
 
-Let's add a new property to each animal, this property will be called <b>location</b> and it will be an object made up of two more properties: <b>lat</b> and <b>lng</b>:
+Let's add a new property to each animal, this property will be called __location__ and it will be an object made up of two more properties: __lat__ and __lng__:
 
 ```
 location : {
@@ -41,7 +41,7 @@ location : {
 ```
 
 But what do they mean?<br>
-Well, in geography, locations or coordinates on the earth are reprisented using two numbers called <b>latitude</b> (lat) and <b>longitude</b> (lng).<br>
+Well, in geography, locations or coordinates on the earth are reprisented using two numbers called __latitude__ (lat) and __longitude__ (lng).<br>
 
 We can use the internet to find some coordinates.<br>
 Open up a web browser and navigate to https://www.google.co.uk/maps/<br>
@@ -76,7 +76,7 @@ Place the following `<button>` element inside your button panel.
 </div>
 ```
 
-Here we are creating a new `<button>` that says "Display Location" and we type the name of the function that will display the animal for the <b>onclick</b> event.<br>
+Here we are creating a new `<button>` that says "Display Location" and we type the name of the function that will display the animal for the __onclick__ event.<br>
 That is all the changes we have to make in our HTML page, now let's add the script to make it work!
 
 # Add the script
@@ -110,8 +110,8 @@ function getSelectedAnimal() {
 
 This might look a little bit complicated, we have two return statements, let's see what is going on.<br>
 
-+ In the first return statement we are calling the function <b>find()</b> that is a function of the Array object (animals is an Array)<br>
-<b>Note:</b> You can read more about the [find() function here](https://www.w3schools.com/jsref/jsref_find.asp)
++ In the first return statement we are calling the function __find()__ that is a function of the Array object (animals is an Array)<br>
+__Note:__ You can read more about the [find() function here](https://www.w3schools.com/jsref/jsref_find.asp)
 + The second return statement is inside the find function, we want to find the animal that is selected, so inside the find() function we create another function that take a animal and returns it's `isSelected` property<br>
 This function will be called for every animal untill a selected animal is found.
 
@@ -190,7 +190,7 @@ function getAllSelectedAnimals() {
 This is a simple change to our previous function.<br>
 All we have done here is change the name of our function, `getAllSelectedAnimals` is a nice descriptive name, and we are now using the `filter` function of our `animals` array.<br>
 The filter function will return all the selected animals rather then just the first one it finds.<br>
-<b>Note:</b> Read more about the [filter() function here]()
+__Note:__ Read more about the [filter() function here]()
 
 ## Changing the displayOnMap function
 
@@ -258,7 +258,7 @@ Our function is now made up of three statements:
 + 2) We are getting all the selected animals by calling our new function that returns all selected animals.
 + 3) We are calling the `forEach()` function of the `selectedAnimals` array.<br>
 The `forEach` function does exactly the same as a `for...loop`, only it is easier to understand because it is a function.
-<b>Note:</b> Read more about the [forEach function here](https://www.w3schools.com/jsref/jsref_forEach.asp)
+__Note:__ Read more about the [forEach function here](https://www.w3schools.com/jsref/jsref_forEach.asp)
 
 # End of lesson
 

@@ -1,7 +1,7 @@
 
 # Tidy up
 
-In the world of computer programming, tidying up or reorganising code is called <b>Refactoring</b> (but this is just a posh word for tidying up).
+In the world of computer programming, tidying up or reorganising code is called __Refactoring__ (but this is just a posh word for tidying up).
 
 ## Using jQuery
 
@@ -39,7 +39,7 @@ You can also notice that I have removed the lines of code that give syle to our 
 
 ## Styling our page
 
-The way we add style to our page is but creating <b>style rules</b> inside a <b>stylesheet</b>, a stylesheet is saved in a special file called a <b>CSS</b> file.<br>
+The way we add style to our page is but creating __style rules__ inside a __stylesheet__, a stylesheet is saved in a special file called a __CSS__ file.<br>
 We have a blank CSS file all ready for us, let's now type some style rules!
 
 ```
@@ -60,7 +60,7 @@ Add the following just below the `<head>` element in our page.
 ```
 
 Here we are saying that we wish to link to a stylesheet that is a text CSS file that is located in the file "styles.css".<br>
-<b>Note:</b> You can read more about the [`<link>` element here](https://www.w3schools.com/tags/tag_link.asp)
+__Note:__ You can read more about the [`<link>` element here](https://www.w3schools.com/tags/tag_link.asp)
 
 ## Moving script
 

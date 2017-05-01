@@ -32,7 +32,7 @@ A object can hav more then one property by seporating each property with a comma
 ## Changing our animal array
 
 Now let's change our animal array to be an array of objects rather then an array of strings:<br>
-<b>Remember</b> A statement can be written over many lines, since our animals array is now a much bigger statement, let's write each object on it's own line so that it is more readable.
+__Remember__ A statement can be written over many lines, since our animals array is now a much bigger statement, let's write each object on it's own line so that it is more readable.
 
 ```
 var animals = [
@@ -43,7 +43,7 @@ var animals = [
 ];
 ```
 
-Doing this has now broken our code, is you save your file (<b>File -> Save</b>) and refresh your browser you will see that each animal is now displayed as `[Object object]`.<br>
+Doing this has now broken our code, is you save your file (__File -> Save__) and refresh your browser you will see that each animal is now displayed as `[Object object]`.<br>
 Let's fix this now.
 
 Each animal is now an object, and we want to display it's name property<br>
@@ -79,7 +79,7 @@ div.appendChild(img);
 ```
 
 Here we are creating a `<img>` element which we are adding to our already created `<div>` element.<br>
-We are using the <b>img</b> property to set the source (`src`) of the image to display that animal.<br>
+We are using the __img__ property to set the source (`src`) of the image to display that animal.<br>
 Read about the (img element here)[https://www.w3schools.com/jsref/dom_obj_image.asp]
 
 # Click event
@@ -91,9 +91,9 @@ First of all we want to create a new varible that we will store the animal into:
 var animal = animals[index];
 ```
 
-In the above statement we are retrieving the animal from the array using the index and storing it in a new varible called <b>animal</b>.<br>
+In the above statement we are retrieving the animal from the array using the index and storing it in a new varible called __animal__.<br>
 Now we have the animal stored in a new varible we can add our click event.<br>
-A `function` that is called when an event happens is called a <b>handler</b>, we can add a new handler to a element using the <b>addEventListener</b> function.<br>
+A `function` that is called when an event happens is called a __handler__, we can add a new handler to a element using the __addEventListener__ function.<br>
 You can read more about the [addEventListener function here](https://www.w3schools.com/js/js_htmldom_eventlistener.asp)
 
 ```
@@ -108,21 +108,21 @@ If we now save our page and refresh our browser we can see that something is wro
 Every animal that we click on displays an alert that say "horse".<br>
 This isn't right, not every animal is a horse, so what is going on?
 
-When our page load the `displayAnimals` function is called, then inside this function the <b>for loop</b> is performed.<br>
+When our page load the `displayAnimals` function is called, then inside this function the __for loop__ is performed.<br>
 Some time later we click on an animal and the click event handler if called.<br>
-Because the <b>for loop</b> has now completed, the animal varible is still set to the last animal in the array.
+Because the __for loop__ has now completed, the animal varible is still set to the last animal in the array.
 
 // TODO image for error
 
 ## How to solve
 
-What we need to do is to pass the animal varible to the event hadler each time the <b>for loop</b> runs.<br>
+What we need to do is to pass the animal varible to the event hadler each time the __for loop__ runs.<br>
 But how pass data to the event handler?
 
-We can do that by using a JavaScript library called <b>jQuery</b>.<br>
+We can do that by using a JavaScript library called __jQuery__.<br>
 jQuery is a library that makes using JavaScript a lot more simpler, we can do more complex thing that just would not be possible for us to do without it.<br>
-More spefificly, we are going to use a jQuery function called <b>on</b>.<br>
-<b>Note:</b> You can [read about the on function here](http://api.jquery.com/on/)
+More spefificly, we are going to use a jQuery function called __on__.<br>
+__Note:__ You can [read about the on function here](http://api.jquery.com/on/)
 
 The first thing we have to do is to add a `<script>` tag for jQuery in the `<head>` section of our page:
 
@@ -134,9 +134,9 @@ The first thing we have to do is to add a `<script>` tag for jQuery in the `<hea
 ```
 
 Here we have told our browser that we wish to load jQuery.<br>
-<b>Note:</b> Here the file `jquery.js` is inside a folder called `js`, if you do not have the file you could change the `src` attribute to https://code.jquery.com/jquery-3.2.0.min.js
+__Note:__ Here the file `jquery.js` is inside a folder called `js`, if you do not have the file you could change the `src` attribute to https://code.jquery.com/jquery-3.2.0.min.js
 
-Now we have added jQuery, let's change the event handler to use the <b>on</b> function.
+Now we have added jQuery, let's change the event handler to use the __on__ function.
 
 ```
 $(img).on("click", { animal : animal }, function(event) {
@@ -151,7 +151,7 @@ We then use the object `event.data` from inside our event handler to retrive the
 
 # Tidy up
 
-In the world of computer programming, tidying up or reorganising code is called <b>Refactoring</b> (but this is just a posh word for tidying up).
+In the world of computer programming, tidying up or reorganising code is called __Refactoring__ (but this is just a posh word for tidying up).
 
 ## Using jQuery
 
@@ -189,7 +189,7 @@ You can also notice that I have removed the lines of code that give syle to our 
 
 ## Stylesheet
 
-In the world of Web, a stylesheet is called a <b>CSS</b> file.<br>
+In the world of Web, a stylesheet is called a __CSS__ file.<br>
 We have a blank CSS file all ready for us, let's now type some style rules!
 
 ```
@@ -210,7 +210,7 @@ Add the following just below the `<head>` element in our page.
 ```
 
 Here we are saying that we wish to link to a stylesheet that is a text CSS file that is located in the file "styles.css".
-<b>Note:</b> You can read more about the [`<link>` element here](https://www.w3schools.com/tags/tag_link.asp)
+__Note:__ You can read more about the [`<link>` element here](https://www.w3schools.com/tags/tag_link.asp)
 
 ## Moving script
 
