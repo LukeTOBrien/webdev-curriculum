@@ -15,28 +15,6 @@ In this lesson we will add a __favouriteVideo__ property to our animals and disp
 There are many diffent maps on the internet, but we are going to be using Google Maps.<br>
 __Note:__ You can read about the [`<video>` element here](https://www.w3schools.com/html/html5_video.asp)
 
-# Add each animal's location
-
-Let's add a new property to each animal, this property will be called __location__ and it will be an object made up of two more properties: __lat__ and __lng__:
-
-```
-location : {
-     lat : -7.477825,
-     lng : 178.679838
-}
-```
-
-But what do they mean?<br>
-Well, in geography, locations or coordinates on the earth are reprisented using two numbers called __latitude__ (lat) and __longitude__ (lng).<br>
-
-We can use the internet to find some coordinates.<br>
-Open up a web browser and navigate to https://www.google.co.uk/maps/<br>
-Now click on the right mouse button and a menu will appear, click on the option that says "What's here?"<br>
-Once you have clicked on the button, a window will appear at the bottom of the screen, inside this window you can see the name of the location you have clicked on, underneath the name are the latitude and longitude coordinates.<br>
-
-Now you know how to find yourown latitude and longitude coordiate, you can use yourown cooridiates or use to ones in this lesson.<br>
-Here are some example coordiates:
-
 ```javascript
 var animals = [
     { name : "sheep", ... favouriteVideo : "https://youtu.be/KBMxpDbp51A" },

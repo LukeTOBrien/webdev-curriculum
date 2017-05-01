@@ -8,19 +8,22 @@ In the world of computer programming, tidying up or reorganising code is called 
 So now we are using jQuery in one place only, but we could use it everywhere and it would make our life easier.<br>
 Let's now change the `displayAnimals` function to use jQuery.
 
-```
+```JavaScript
 function displayAnimals() {
     var container = $("#animal-container");
     for (var index = 0; index < animals.length; index++) {
         var animal = animals[index];
         var div = $('<div/>');
 
+        div.on("click", { animal : animal }, function(event) {
+            var animal = event.data.animal;
+            var isSelected = animal.isSelected;
+            animal.isSelected = ! isSelected;
+            $(this).toggleClass('selected');
+        });
+
         var img = $("<img/>");
         img[0].src = animals[index].img;
-
-        img.on("click", { animal : animal }, function(event) {
-            alert(event.data.animal.name)
-        });
 
         div.append(img);
 
@@ -42,7 +45,7 @@ You can also notice that I have removed the lines of code that give syle to our 
 The way we add style to our page is but creating __style rules__ inside a __stylesheet__, a stylesheet is saved in a special file called a __CSS__ file.<br>
 We have a blank CSS file all ready for us, let's now type some style rules!
 
-```
+```CSS
 #animal-container > div {
     display: block;
     width: 200px;
@@ -55,7 +58,7 @@ We are saying that any `<div>` element that is below (`>`) the `animal-container
 Now that we have our stylesheet, let's add it to our page.<br>
 Add the following just below the `<head>` element in our page.
 
-```
+```HTML
 <link rel="stylesheet" type="text/css" href="styles.css">
 ```
 
@@ -76,7 +79,7 @@ Now our animals are well organised into a seperote file, but we still need to te
 
 We can tell our page to look for the animals in the file `animals.js` by copying the following code into your `<head>` element.
 
-```
+```HTML
 <script src="js/animals.js"></script>
 ```
 
@@ -91,7 +94,7 @@ Now our displayAnimal function is well organised into a seperote file, but we st
 
 We can tell our page to look for the displayAnimal function in the file `script.js` by copying the following code into your `<head>` element.
 
-```
+```HTML
 <script src="js/script.js"></script>
 ```
 

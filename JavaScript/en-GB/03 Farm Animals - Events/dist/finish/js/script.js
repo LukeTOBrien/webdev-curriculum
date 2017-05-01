@@ -40,7 +40,10 @@ function displaySelectedAnimalFavouriteVideo(animal) {
 
     var video = $("<video />");
     video[0].controls = true;
-    video[0].src = animal.video;
+    var src = $("<source />")
+    src[0].src = animal.favouriteVideo;
+    video.append(src);
+    video[0].load();
     
     output.append(video);
 }

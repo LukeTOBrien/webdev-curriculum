@@ -1,6 +1,6 @@
 #animal-container > div {
     width: 200px;
-    display: block;
+    display: inline-block;
 }
 
 #animal-container > div.selected {
