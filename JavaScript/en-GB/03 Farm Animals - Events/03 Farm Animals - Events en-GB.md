@@ -11,77 +11,6 @@ stylesheet: web
 
 In this lesson we will start from our previous Farm Animals List lesson and add some images and interaction.
 
-# Array of Objects
-
-The first thing we want to do is to change our animals array from and array of strings to an array of objects.
-
-## What is an object?
-
-An object is a simple list of properties and values surrouded buy curly brackets ({}).<br>
-Each property is assigned a value using a colon (:).<br>
-A very simple object with one property can be written line this:
-
-```
-{ name : "horse" }
-```
-
-A object can hav more then one property by seporating each property with a comma(,):
-
-{ name : "horse", age : 12 }
-
-## Changing our animal array
-
-Now let's change our animal array to be an array of objects rather then an array of strings:<br>
-__Remember__ A statement can be written over many lines, since our animals array is now a much bigger statement, let's write each object on it's own line so that it is more readable.
-
-```
-var animals = [
-    { name : "sheep" },
-    { name : "cow" },
-    { name : "pig" },
-    { name : "horse" }
-];
-```
-
-Doing this has now broken our code, is you save your file (__File -> Save__) and refresh your browser you will see that each animal is now displayed as `[Object object]`.<br>
-Let's fix this now.
-
-Each animal is now an object, and we want to display it's name property<br>
-Change the `innerHTML` line of code to display the animal's name property by simply adding `.name` after we retrieve the object from the array:
-
-```
-div.innerHTML = animals[index].name;
-```
-
-## Image property
-
-Text is all very well but it would look a lot nicer to display images of the animal instead of just it's name.<br>
-Inside the `img` folder you will find pictures of the animals that we can use.<br>
-Let's add these images to our animal object.<br>
-We have `sheep.png`, `cow.png`, `pig.png` and `horse.png`, and remember they are inside the `img` folder:
-
-```
-var animals = [
-    { name : "sheep", img : "img/sheep.png" },
-    { name : "cow", img : "img/cow.png" },
-    { name : "pig", img : "img/pig.png" },
-    { name : "horse", img : "img/horse.png" }
-];
-```
-
-Now that we have added the images to our objects, we can now change our code to display the images instead of the name of the animal.<br>
-Replace the statement `div.innerHTML...` with the following code:
-
-```
-var img = document.createElement('img');
-img.src = animals[index].img;
-div.appendChild(img);
-```
-
-Here we are creating a `<img>` element which we are adding to our already created `<div>` element.<br>
-We are using the __img__ property to set the source (`src`) of the image to display that animal.<br>
-Read about the (img element here)[https://www.w3schools.com/jsref/dom_obj_image.asp]
-
 # Click event
 
 Next let's add a event to each animal so that when it is clicked upon it's name will appear in a alert box<br>
@@ -112,7 +41,7 @@ When our page load the `displayAnimals` function is called, then inside this fun
 Some time later we click on an animal and the click event handler if called.<br>
 Because the __for loop__ has now completed, the animal varible is still set to the last animal in the array.
 
-// TODO image for error
+![screenshot](res/event-error.svg)
 
 ## How to solve
 
@@ -139,15 +68,63 @@ __Note:__ Here the file `jquery.js` is inside a folder called `js`, if you do no
 Now we have added jQuery, let's change the event handler to use the __on__ function.
 
 ```
-$(img).on("click", { animal : animal }, function(event) {
+$(div).on("click", { animal : animal }, function(event) {
     alert(event.data.animal.name)
 });
 ```
 
-We can see her that now we are using the function called `on` instead of `addEventListener` and we are also using special sympols `$()` the wrap around our `<img>` varible.<br>
-The reason that we wrap our img varible in special sympols is because `on` is a jQuery function, so we must make our img into a jQuery object by typing `$(img)`.<br>
+We can see her that now we are using the function called `on` instead of `addEventListener` and we are also using special sympols `$()` the wrap around our `<div>` varible.<br>
+The reason that we wrap our div varible in special sympols is because `on` is a jQuery function, so we must make our div into a jQuery object by typing `$(div)`.<br>
 The main difference we can see with the code above is that we are creating an object with a property called animal that we are passing into our event handler.<br>
 We then use the object `event.data` from inside our event handler to retrive the animal object.
+
+## Changing a property
+
+So now let's change our event so that it does something more useful then just display the animal's name, let's change our event so that the computer remebers which animal we have clicked on.<br>
+By clicking on a animal, we are choosing (or selecting) a animal, once that animal has been selected, we can then use that selected animal in other functions that we will create in later lessons.
+
+Change your `click` event to the following code:
+
+```
+$(div).on("click", { animal : animal }, function(event) {
+    var animal = event.data.animal;
+    var isSelected = animal.isSelected;
+    animal.isSelected = ! isSelected;
+    $(this).toggleClass('selected');
+});
+```
+
+Wow, now doesn't that look complicated?<br>
+Let's break each line down to see what it is doing<br>
+1) Firstly we are getting the animal from our event data and then assigning it to a new varible called `animal`
+2) Next we get the animals `isSelected` property and put that into a new varible too. This varible will tell us wheather or not the animal is selected.
+3) Now we set the animal's isSelected property to be the oposite of whatever our varible is.
+The `!` symbol means `not`.
+4) The special symbol `this` is a varible that points to the the object that is calling the event, because our varible `div` is triggering the event, `this` points to our `div` varible<br>
+We are then calling the __toggleClass()__ event of the __jQuery__ object to toggle the __CSS class__ "selected" on and off.<br>
+__Note:__ You can read more about the [__toggleClass()__ function here]()
+
+## Style
+
+It our code we are toggling the class "selected" on and off, but where is the class "selected"?<br>
+Let's create it now.<br>
+Insert the following code just inside your `<head>` element:
+
+```HTML
+<style>
+#animal-container > div.selected {
+    width: 200px;
+    border: red solid;
+}
+</style>
+```
+
+This is a peice of __CSS__ code that we place inside a `<style>` element.<br>
+Now this __CSS Rule__ might seem a little bit complicated, this rule is saying "Any `<div>` element with a class called "selected" that is a child of the element with the ID of "animal-container".
+
+# Save and try
+
+Let's save our work now and refresh our browser to try out our latest changes, all should be working perfectly.
 
 # Tidy up
 
@@ -158,19 +135,22 @@ In the world of computer programming, tidying up or reorganising code is called 
 So now we are using jQuery in one place only, but we could use it everywhere and it would make our life easier.<br>
 Let's now change the `displayAnimals` function to use jQuery.
 
-```
+```JavaScript
 function displayAnimals() {
     var container = $("#animal-container");
     for (var index = 0; index < animals.length; index++) {
         var animal = animals[index];
         var div = $('<div/>');
 
+        div.on("click", { animal : animal }, function(event) {
+            var animal = event.data.animal;
+            var isSelected = animal.isSelected;
+            animal.isSelected = ! isSelected;
+            $(this).toggleClass('selected');
+        });
+
         var img = $("<img/>");
         img[0].src = animals[index].img;
-
-        img.on("click", { animal : animal }, function(event) {
-            alert(event.data.animal.name)
-        });
 
         div.append(img);
 
@@ -187,12 +167,12 @@ The one bit of code that might confusse you is that we are using an array index 
 This is because the jQuery object is actually an array of elements, so we use a index to access the first element (rember array's start from 0).<br>
 You can also notice that I have removed the lines of code that give syle to our `<div>`, I've done that so that we can we can add them again late using a stylesheet.
 
-## Stylesheet
+## Styling our page
 
-In the world of Web, a stylesheet is called a __CSS__ file.<br>
+The way we add style to our page is but creating __style rules__ inside a __stylesheet__, a stylesheet is saved in a special file called a __CSS__ file.<br>
 We have a blank CSS file all ready for us, let's now type some style rules!
 
-```
+```CSS
 #animal-container > div {
     display: block;
     width: 200px;
@@ -205,20 +185,50 @@ We are saying that any `<div>` element that is below (`>`) the `animal-container
 Now that we have our stylesheet, let's add it to our page.<br>
 Add the following just below the `<head>` element in our page.
 
-```
+```HTML
 <link rel="stylesheet" type="text/css" href="styles.css">
 ```
 
-Here we are saying that we wish to link to a stylesheet that is a text CSS file that is located in the file "styles.css".
+Here we are saying that we wish to link to a stylesheet that is a text CSS file that is located in the file "styles.css".<br>
 __Note:__ You can read more about the [`<link>` element here](https://www.w3schools.com/tags/tag_link.asp)
 
 ## Moving script
 
 Let's now move some more of our code.<br>
 Inside the `js` folder there are two more blank files, `animals.js` and `script.js`, these files end with `.js` which stands for `JavaScript`.<br>
-Let's 
+Let's move our animals array into the `animals.js` folder.
 
+## Moving the animals array
 
+Drag your mouse over the entire __animals__ array and press the special cut command __Ctrl + X__.<br>
+Now open up the file `animals.js` and press the special paste command __Ctrl + V__.<br>
+Now our animals are well organised into a seperote file, but we still need to tell our page where the animals are.
+
+We can tell our page to look for the animals in the file `animals.js` by copying the following code into your `<head>` element.
+
+```HTML
+<script src="js/animals.js"></script>
+```
+
+This is a simple bit of code.<br>
+Here we telling our page that we would like to use some scrip, and the __source__ (`src` means source) is located inside the `js` folder in a file called `animals.js`.
+
+## Moving the `displayAnimals` function
+
+Drag your mouse over the entire __displayAnimal__ function and press the special cut command __Ctrl + X__.<br>
+Now open up the file `script.js` and press the special paste command __Ctrl + V__.<br>
+Now our displayAnimal function is well organised into a seperote file, but we still need to tell our page where the displayAnimal function is.
+
+We can tell our page to look for the displayAnimal function in the file `script.js` by copying the following code into your `<head>` element.
+
+```HTML
+<script src="js/script.js"></script>
+```
+
+This is a simple bit of code.<br>
+Here we telling our page that we would like to use some scrip, and the __source__ (`src` means source) is located inside the `js` folder in a file called `script.js`.
+
+## Make sure it still works
 
 # End of lesson
 

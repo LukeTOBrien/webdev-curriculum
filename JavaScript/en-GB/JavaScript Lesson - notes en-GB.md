@@ -23,8 +23,8 @@ All lessons have been created using a basic text editor, this keeps the lessons 
 
 The following is a list of recommended simple editors the can be used with this lesson series:
 + Notepad
-+ Notepad++ (Advised) [Downloaded from here]()
-+ Visual Studio Code [Downloaded from here]()
++ Notepad++ (Advised) [Downloaded from here](https://notepad-plus-plus.org/)
++ Visual Studio Code [Downloaded from here](https://code.visualstudio.com/)
 
 I would advise you to use Notepad++ in teaching these lessons to your student as it is nice and simple and allows for many files to be opened in tabs, so in later lessons of the series, multiple files can be dealt with easily.
 

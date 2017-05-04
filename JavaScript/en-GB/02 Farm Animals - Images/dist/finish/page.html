@@ -1,6 +1,5 @@
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="styles.css">
         <script>
             var animals = [
     { name : "sheep", img : "img/sheep.png" },
@@ -10,7 +9,7 @@
 ];
 
             function displayAnimals() {
-                var container = $("#animal-container");
+                var container = document.getElementById("animal-container");
                 for (var index = 0; index < animals.length; index++) {
                     var animal = animals[index];
                     var div = document.createElement('div');
