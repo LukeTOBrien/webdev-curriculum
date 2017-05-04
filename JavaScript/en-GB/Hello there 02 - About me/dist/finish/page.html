@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <script>
+
+            var me = {};
+
+            function greeting() {
+                alert("Hello there!");
+                var name = prompt("What is your name?");
+                alert("Your name is " + name);
+
+                do {
+                    alert("Tell me about yourself");
+
+                    var ok = prompt("Do you want to continue? Yes or No");
+                } while (ok == "Yes" || ok == "yes" || ok == "y" || ok == "Y");
+
+                console.log(me);
+            }
+
+            function aboutMe() {
+                var thing = input("Tell me one thing you have");
+                var value = input("What is your " + thing);
+                me[thing] = value
+            }
+
+        </script>
+    </head>
+    <body>
+        <button onclick="greeting()">Hello there!</button>
+    </body>
+</html>
