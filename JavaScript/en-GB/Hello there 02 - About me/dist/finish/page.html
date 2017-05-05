@@ -7,11 +7,12 @@
             function greeting() {
                 alert("Hello there!");
                 var name = prompt("What is your name?");
-                alert("Your name is " + name);
+                me.name = name;
+                alert("Your name is " + me.name);
 
                 do {
                     alert("Tell me about yourself");
-
+                    aboutMe()
                     var ok = prompt("Do you want to continue? Yes or No");
                 } while (ok == "Yes" || ok == "yes" || ok == "y" || ok == "Y");
 

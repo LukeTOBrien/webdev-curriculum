@@ -1,11 +1,16 @@
 <html>
     <head>
         <script>
+
+            var me = {};
+
             function greeting() {
                 alert("Hello there!");
                 var name = prompt("What is your name?");
-                alert("Your name is " + name);
+                me.name = name;
+                alert("Your name is " + me.name);
             }
+
         </script>
     </head>
     <body>
