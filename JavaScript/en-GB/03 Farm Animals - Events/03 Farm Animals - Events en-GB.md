@@ -25,7 +25,7 @@ Now we have the animal stored in a new varible we can add our click event.<br>
 A `function` that is called when an event happens is called a __handler__, we can add a new handler to a element using the __addEventListener__ function.<br>
 You can read more about the [addEventListener function here](https://www.w3schools.com/js/js_htmldom_eventlistener.asp)
 
-```
+```JavaScript
 img.addEventListener("click", function(event) {
     alert(animal.name)
 });
@@ -55,7 +55,7 @@ __Note:__ You can [read about the on function here](http://api.jquery.com/on/)
 
 The first thing we have to do is to add a `<script>` tag for jQuery in the `<head>` section of our page:
 
-```
+```HTML
 <head>
     <script src="js/jquery.js"></script>
     ...
@@ -67,7 +67,7 @@ __Note:__ Here the file `jquery.js` is inside a folder called `js`, if you do no
 
 Now we have added jQuery, let's change the event handler to use the __on__ function.
 
-```
+```JavaScript
 $(div).on("click", { animal : animal }, function(event) {
     alert(event.data.animal.name)
 });
@@ -85,7 +85,7 @@ By clicking on a animal, we are choosing (or selecting) a animal, once that anim
 
 Change your `click` event to the following code:
 
-```
+```JavaScript
 $(div).on("click", { animal : animal }, function(event) {
     var animal = event.data.animal;
     var isSelected = animal.isSelected;
