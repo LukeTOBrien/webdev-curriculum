@@ -2,10 +2,13 @@
     <head>
         <style>
             .peek {
-                display: none;
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 20s, opacity 0.5s linear;
             }
             input:checked + .peek {
-                display: block;
+                visibility: visible;
+                opacity: 1;
             }
         </style>
     </head>

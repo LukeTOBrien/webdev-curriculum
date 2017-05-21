@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <script>
+            var countries = [ "Bermuda", "Bhutan", "Fiji", "Galapagos" ]
+
+            function displayCountries() {
+                var container = document.getElementById("countries-container");
+                for (var index = 0; index < countries.length; index++) {
+                    var div = document.createElement('div');
+
+                    div.style.width = 200
+                    div.style.display = "inline-block"
+
+                    div.innerHTML = countries[index];
+                    container.appendChild(div);
+                }
+
+            }
+        </script>
+    </head>
+    <body onload="displayCountries()">
+        <div id="countries-container">
+        </div>
+    </body>
+</html>
