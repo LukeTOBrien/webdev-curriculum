@@ -4,15 +4,6 @@
 
             var me = {};
 
-            var questions = [ 'ability'];
-            var functions = {
-                'ability' : function() {
-                    var prop = prompt("Tell me one ability you have");
-                    var value = prompt("Tell me about your " + prop + "?");
-                    me.abilities[prop] = value
-                }
-            };
-
             function questions() {
                 alert("Hello there!");
                 var name = prompt("What is your name?");
@@ -20,8 +11,8 @@
                 alert("Your name is " + me.name);
 
                 var message = "What would you like to tall me about yourself?" +
-                    "\n1 = About you" +
-                    "\n2 = About your abilities";
+                    "\n1 = Things I have" +
+                    "\n2 = Abilities I have";
 
                 do {
                     var option = prompt(message);
@@ -29,9 +20,9 @@
                     switch (option)
                     {
                         case 1:
-                            aboutMe();
+                            thingIHave();
                         case 2:
-                            functions['ability']();
+                            myAbilities();
                     }
                     var ok = prompt("Do you want to continue? Yes or No");
                 } while (ok == "Yes" || ok == "yes" || ok == "y" || ok == "Y");
@@ -39,10 +30,23 @@
                 console.log(me);
             }
 
-            function aboutMe() {
+            function thingIHave() {
                 var thing = prompt("Tell me one thing you have");
                 var value = prompt("Tell me about your " + thing + "?");
-                me[thing] = value
+                if (me[thing]) {
+                    var array = [];
+                    array.push(me[thing]);
+                    array.push(value);
+                    me[thing] = array;
+                } else {
+                    me[thing] = value;
+                }
+            }
+
+            function myAbilities() {
+                var prop = prompt("Tell me one ability you have");
+                var value = prompt("Tell me about your " + prop + "?");
+                me.abilities[prop] = value;
             }
 
         </script>

@@ -32,6 +32,19 @@ You can see in the above HTML code we have created our basic page with a `<scrip
 Now save the file by clicking __File -> Save As__ making sure that the file is saved with '.html' at the end.<br>
 <i>Ask you teacher if you need some help</i>
 
+# Create an empty object
+
+We need somewhere to store the answers to to the question.<br>
+Let's create an object that we will store the answers into<br>
+__Note:__ Read more about [objects here](https://www.w3schools.com/js/js_objects.asp).
+
+```JavaScript
+var me = {};
+```
+
+In JavaScript, objects are _dynamic_ which means that we can easily fill up our object with properties as we go along.<br>
+Let's fill up our object now.
+
 # Create the `questions()` function
 
 Now let us create a `function` inside our `<script>` block.<br>
@@ -71,8 +84,115 @@ Here we are asking our question.<br>
 You can see here that we are using the `prompt` function to ask the question and then we are storing the answer in a __varible__ called `name`.<br>
 _Note: You can read more about the [prompt function here]()._
 
-Now that we have our name stored in a virble, we can use this
+Now that we have our name stored in a virble, we can then store this varible in our object:
 
-## Asking more questions
+```JavaScript
+me.name = name;
+```
+
+Our `me` object is empty, the `name` property does not exist.<br>
+But because JavaScript is _dynamic_, we can create a property called `name` as if it did exist.
+
+Lastly let's just display a greeting so that we can be sure that our object has a `name` property.
+
+``` JavaScript
+alert("Your name is " + me.name);
+```
+
+Now we've added one property to our object, let's add some more properties by answering more questions.
+
+# Asking more questions
+
+Let's add a new function that will ask questions and then poplate our object with the answers.<br>
+As we are going to ask questions this that you have (like mobile phone, or what books you have), let's call our function a nice meaningful name like... `thingIHave()`:
+
+```JavaScript
+function thingIHave() {
+    var thing = prompt("Tell me one thing you have");
+    var value = prompt("Tell me about your " + thing + "?");
+    me[thing] = value
+}
+```
+
+This function is small but there is a lot going on, let's take a look at what each line does
+
+1) Here we are asking about something you have, we are then storing the answer to the question in a new varible called `thing`.<br>
+An example of a thing we have could be a "mobile".
+2) We are then asking for information about that thing.<br>
+An example of information about our mobile could be "iPhone".
+3) Here we are populating out object with the name of our property (mobile) and it's value (iPhone).<br>
+So in our example, our object would be `{ "mobile" : "iPhone" }`
+
+If we where to call this function only once inside our `questions()`, we would only be asked one question and so populate our object with only one peice of information.<br>
+What we really want to do is continue asking the questions until we want to stop.
+
+## Continue asking questions
+
+To repeat code, we use _loops_, in our case we are going to you a __do...while loop__.<br>
+__Note:__ Read more about [do...while loops here](https://www.w3schools.com/jsref/jsref_dowhile.asp).
+
+A __do...while loop__ is telling our browser that we would like to do something while a condition is true.<br>
+So, in our code we can ask another question "Do you want to continue?" and continue the loop while the answer is "Yes".
+
+```JavaScript
+do {
+    aboutMe();
+    var ok = prompt("Do you want to continue? Yes or No");
+} while (ok == "Yes" || ok == "yes" || ok == "y" || ok == "Y");
+```
+
+In the above code we have used the special symbol `||` which is a __Logical Operator__ (meaning "or") inside our condition.<br>
+This means that the answer doesn't have to be "Yes" exactly, we can just answer "y" if we like.<br>
+__Note:__ You can read more about [Logical Operators here](https://www.w3schools.com/js/js_comparisons.asp)
+
+# Displaying output on the console
+
+Now that we have created our functions to populate our object, it would be nice to see what our object looks like at the end.<br>
+We can do that by typing the following code at the the end of our `questions()` function:
+
+```JavaScript
+console.log(me); 
+```
+
+`console.log()` is a way of outputting values for debugging purposes, but there are many different way of outputting values.<br>
+__Note:__ Red more about [outputting data here](https://www.w3schools.com/js/js_output.asp).
+
+In our browser, we can see the console outpt by pressing the __F12__ key on your keyboard.<br>
+Once you press __F12__ you will see a screen pop up like the one below:
+
+TODO: Insert console screenshot in Chrome and Edge
+
+Inside the screen you can see many tabs that contain different screen, but the one we are interested in is the __Console__ screen.<br>
+The console screen displays output from the `console.log()` statement and also any error that may occour.
+
+## Running our code
+
+Now we know how to open the console screen, let's open it by pressing __F12__.<br>
+Now that the console screen is open, we can run our code by clicking on the "Ask me some questions!" button.
+
+Answer all the questions that you want to, remeber we can continue asking by answering "Yes" to the question "Dou you want to continue?".<br>
+When you have finnished answering questions, simply answer "No" to not continue and then you will the object that we have populated apppear in the Console screen.<br>
+
+TODO: Object inside console screen
+
+# Challanges
+
+## 1 Many of the same thing
+
+There is a problem in our code, if we have two things of the same type (two comics) but we have two different anwsers (Batman and Spiderman) then the first answer will be overwitten by the second.<br>
+What we need is a way to check to see is an answer exists, and if it does, change the object's property into and array of answers rather than just a single answer.<br>
 
 
+```JavaScript
+if (me[thing]) {
+    if (me[thing].push)) {
+        me[thing].push(value);
+    } else {
+        me[thing] = value;
+    }
+}
+```
+
+If you can understand this code and if you would like
+
+## 2 Different types of questions
