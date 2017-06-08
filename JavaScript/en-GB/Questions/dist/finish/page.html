@@ -19,10 +19,12 @@
 
                     switch (option)
                     {
-                        case 1:
+                        case '1':
                             thingIHave();
-                        case 2:
+                            break;
+                        case '2':
                             myAbilities();
+                            break;
                     }
                     var ok = prompt("Do you want to continue? Yes or No");
                 } while (ok == "Yes" || ok == "yes" || ok == "y" || ok == "Y");
@@ -34,10 +36,12 @@
                 var thing = prompt("Tell me one thing you have");
                 var value = prompt("Tell me about your " + thing + "?");
                 if (me[thing]) {
-                    var array = [];
-                    array.push(me[thing]);
-                    array.push(value);
-                    me[thing] = array;
+                    var prop = me[thing];
+                    if (prop.push) {
+                        me[thing] = prop.concat([ value ]);
+                    } else {
+                        me[thing] = [ prop, value ];
+                    }
                 } else {
                     me[thing] = value;
                 }

@@ -177,7 +177,37 @@ TODO: Object inside console screen
 
 # Challanges
 
-## 1 Many of the same thing
+## 1 Different types of questions
+
+```JavaScript
+function myAbilities() {
+    var prop = prompt("Tell me one ability you have");
+    var value = prompt("Tell me about your " + prop + "?");
+    me.abilities[prop] = value;
+}
+```
+
+```JavaScript
+var message = "What would you like to tall me about yourself?" +
+    "\n1 = Things I have" +
+    "\n2 = Abilities I have";
+```
+
+```JavaScript
+var option = prompt(message);
+
+switch (option)
+{
+    case '1':
+        thingIHave();
+        break;
+    case '2':
+        myAbilities();
+        break;
+}
+```
+
+## 2 Many of the same thing
 
 There is a problem in our code, if we have two things of the same type (two comics) but we have two different anwsers (Batman and Spiderman) then the first answer will be overwitten by the second.<br>
 What we need is a way to check to see is an answer exists, and if it does, change the object's property into and array of answers rather than just a single answer.<br>
@@ -185,14 +215,15 @@ What we need is a way to check to see is an answer exists, and if it does, chang
 
 ```JavaScript
 if (me[thing]) {
-    if (me[thing].push)) {
-        me[thing].push(value);
+    var prop = me[thing];
+    if (prop.push) {
+        me[thing] = prop.concat([ value ]);
     } else {
-        me[thing] = value;
+        me[thing] = [ prop, value ];
     }
+} else {
+    me[thing] = value;
 }
 ```
 
 If you can understand this code and if you would like
-
-## 2 Different types of questions
