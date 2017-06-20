@@ -177,7 +177,10 @@ TODO: Object inside console screen
 
 # Challanges
 
-## 1 Different types of questions
+## 1 - Different types of questions
+
+Let's ask a different question about ourselves, this question will be about our abilities.<br>
+Copy the following code into your `<script>` block to create a new function:
 
 ```JavaScript
 function myAbilities() {
@@ -187,11 +190,9 @@ function myAbilities() {
 }
 ```
 
-```JavaScript
-var message = "What would you like to tall me about yourself?" +
-    "\n1 = Things I have" +
-    "\n2 = Abilities I have";
-```
+Now that we have this new function we will have to decide which function to call.<br>
+We can decide which function to call by using a __switch__ statement.<br>
+A __switch__ statement is a list of possible values a varible could be, let's take a look at the code we will use in our main `questions()` function:
 
 ```JavaScript
 var option = prompt(message);
@@ -207,11 +208,24 @@ switch (option)
 }
 ```
 
-## 2 Many of the same thing
+We use the keyword __case__ to decide what to do when the varible `option` equals 1 and another __case__ for when the option equals 2.<br>
+Here we are prompting the user for input again so that we can make a decision, but where does out `message` varible come from?<br>
+Just before we prompt the user for a message in our code copy the following code to create the `message` varible:
+
+```JavaScript
+var message = "What would you like to tall me about yourself?" +
+    "\n1 = Things I have" +
+    "\n2 = Abilities I have";
+```
+
+After you have done this, save your work and run it again, you should now have the option of two different question and the `me` object displayed in the console will contain _abilities_<br>
+__Note:__ In the above `message` we are using __Special Charecters__ and __Breaking Long Code Lines__.<br>
+[Read more about strings here](https://www.w3schools.com/js/js_strings.asp)
+
+## 2 - Many of the same thing
 
 There is a problem in our code, if we have two things of the same type (two comics) but we have two different anwsers (Batman and Spiderman) then the first answer will be overwitten by the second.<br>
 What we need is a way to check to see is an answer exists, and if it does, change the object's property into and array of answers rather than just a single answer.<br>
-
 
 ```JavaScript
 if (me[thing]) {
@@ -226,4 +240,4 @@ if (me[thing]) {
 }
 ```
 
-If you can understand this code and if you would like
+This code is a little bit complicated 
