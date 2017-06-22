@@ -1,11 +1,18 @@
-Farm Animals - Information
-+ Animals has a PlaceOfBirth property which is the location (eg Madagascar of Hawii)
-+ Click on animal placemarkers on map and show information from wikipedia
-Animal form!
-+ Create a form in seporate file, get HTML using jQuery get, disply in jQueryUI Dialog
-+ ?? Save and Load from cookie
-Animal race
-+ Animal.x =+ random()
+Map
++ Challange Click on animal placemarkers on map and show information from wikipedia
+Form
++ Create a form in seporate file, submit and display data in console
++ Shallenge, use jQueryUI the display form in dialog box
+Race - Buttons/Images
++ Player.x =+ random()
++ Challenge: Giving odds
+AJAX
++ Explain HTTP (POST, GET, PUT, DELETE)
++ Explain HTTP status codes
++ Get from an open API (data.gov?)
++ POST to something (create a API with .NetFiddle)
+Defered Object
++ Use a timer and complete a object
 
 # CSS
 Peek-a-boo
@@ -14,4 +21,4 @@ Peek-a-boo
 # HTML
 Video (Big Buck Bunny)
 + Create a page with the video
-+ Create controls with JavaScript
++ Challenge: Create controls with JavaScript

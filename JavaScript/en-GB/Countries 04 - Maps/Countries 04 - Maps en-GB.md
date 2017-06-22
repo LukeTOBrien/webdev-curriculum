@@ -9,8 +9,6 @@ stylesheet: web
 
 # Introduction { .intro}
 
-Our farm countries at not just confined to one farm, but they live in many different locations all over the world.
-
 In this lesson we will add a __location__ property to our countries and display their locations on a map.<br>
 There are many different maps on the internet, but we are going to be using Google Maps.<br>
 __Note:__ You can read about [Google Maps here](https://www.w3schools.com/graphics/google_maps_intro.asp)
@@ -40,7 +38,7 @@ If you are curious, API stands for Application Programming Interface
 
 ## Add a button
 
-Before we can add a button, we need a place where we can put it, similar to the country container, but for buttons, what shall we call it?<br>
+Before we can add a button, we need a place where we can put it, what shall we call it?<br>
 That's correct, let's call it `button-panel`.<br>
 Type the following code underneath the `countries-container`.
 
