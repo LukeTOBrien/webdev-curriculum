@@ -1,82 +1,83 @@
 <html>
-    <head>
-        <style>
 
-            #grid-container {
-                    display: table;
-                    border-spacing: 1px;
-                    background-color: black;
-                    border: 5px solid black;
-            }
-    
-            .row {
-                display: table-row;
+<head>
+    <style>
+        #grid-container {
+            display: table;
+            border-spacing: 1px;
+            background-color: black;
+            border: 5px solid black;
+        }
+        
+        .row {
+            display: table-row;
+        }
+        
+        .pixel {
+            display: table-cell;
+            background-color: white;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .pen {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 2px solid black;
+        }
+    </style>
+    <script>
+        var gridSize = { rows: 8, columns: 8 };
+        var penColours = ['red', 'chartreuse', 'blue', 'white', 'black'];
+        var penColour = 'black';
+
+        function setup() {
+            setupPens();
+            setupGrid();
+        }
+
+        function setupPens() {
+            var container = document.getElementById('pens-container');
+            penColours.forEach(function (colour) {
+                var div = document.createElement('div');
+                div.className = 'pen';
+                div.style.backgroundColor = colour;
+                div.onclick = () => setPenColour(colour);
+                container.appendChild(div);
+            });
+        }
+
+        function setupGrid() {
+            var container = document.getElementById('grid-container');
+            // r for Rows
+            for (var r = 0; r < gridSize.rows; r++) {
+                var row = document.createElement('div');
+                row.className = 'row';
+                // c for Columns
+                for (var c = 0; c < gridSize.columns; c++) {
+                    var pixel = document.createElement('div');
+                    pixel.className = 'pixel';
+                    pixel.onclick = setPixelColour.bind(null, pixel);
+                    row.appendChild(pixel);
                 }
-                
-            .pixel {
-                display: table-cell;
-                background-color: white;
-                width: 40px;
-                    height: 40px;
-                }
-                
-                .pen {
-                display: inline-block;
-                width: 40px;
-                    height: 40px;
-                    border: 2px solid black;
-                }
-            </style>
-        <script>
-            var gridSize = { rows : 8 , columns: 8 };
-            var penColours = [ 'red', 'chartreuse', 'blue', 'white', 'black' ];
-            var penColour = 'black';
-
-            function setup() {
-                setupPens();
-                setupGrid();
+                container.appendChild(row);
             }
+        }
 
-            function setupPens() {
-                var container = document.getElementById('pens-container');
-                penColours.forEach(function(colour) {
-                    var div = document.createElement('div');
-                    div.className = 'pen';
-                    div.style.backgroundColor = colour;
-                    div.onclick = () => setPenColour(colour);
-                    container.appendChild(div);
-                });
-            }
+        function setPenColour(colour) {
+            penColour = colour;
+        }
 
-            function setupGrid() {
-                var container = document.getElementById('grid-container');
-                // r for Rows
-                for (var r = 0 ; r < gridSize.rows ; r ++) {
-                    var row = document.createElement('div');
-                    row.className = 'row';
-                    // c for Columns
-                    for (var c = 0 ; c < gridSize.columns ; c ++) {
-                        var pixel = document.createElement('div');
-                        pixel.className = 'pixel';
-                        pixel.onclick = setPixelColour.bind(null, pixel);
-                        row.appendChild(pixel);
-                    }
-                    container.appendChild(row);
-                }
-            }
+        function setPixelColour(pixel) {
+            pixel.style.backgroundColor = penColour;
+        }
+    </script>
+</head>
 
-            function setPenColour(colour) {
-                penColour = colour;
-            }
+<body onload="setup()">
+    <div id="pens-container"></div>
+    <div id="grid-container"></div>
+</body>
 
-            function setPixelColour(pixel) {
-                pixel.style.backgroundColor = penColour;
-            }
-
-        </script>
-    </head>
-    <body onload="setup()">
-        <div id="pens-container"></div>
-        <div id="grid-container"></div>
-    </body>
 </html>

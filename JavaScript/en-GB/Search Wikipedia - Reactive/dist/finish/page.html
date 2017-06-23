@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script src="js/Rx.min.js"></script>
+        <script>
+            // http://reactivex.io/
+            // https://github.com/ReactiveX/rxjs
+            // http://reactivex.io/rxjs/
+            function load() {
+                Rx.Observable
+                    .fromEvent(document.getElementById('term'),'change')
+                    .throttleTime(100)
+                    .map(evt => evt.target)
+                    .subscribe(val => console.log(val.value));
+            }
+        </script>
+    </head>
+        <body onload="load()">
+        <input id="term" />
+        <div id="output">
+
+        </div>
+    </body>
+</html>

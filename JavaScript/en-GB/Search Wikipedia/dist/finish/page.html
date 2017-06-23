@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <script src="js/jquery.js"></script>
+        <script>
+            // http://api.jquery.com/jquery.ajax/
+            function search() {
+                var term = document.getElementById('term').nodeValue;
+
+                $.ajax("www.wikipedia.org", {
+                    method: "GET",
+                    data : { term: term },
+                    success : displayData,
+                    error : displayError
+                })
+            }
+
+            function displayData(data, textStatus, jqXHR) {
+                var output = $('#output');
+                output.html(data);
+            }
+
+            function displayError(jqXHR, textStatus, errorThrown) {
+                var output = $('#output');
+                output.html(textStatus);
+            }
+
+        </script>
+    </head>
+    <body>
+        <input id="term" />
+        <button id="search" onclick="search()">Search</button>
+        <div id="output">
+
+        </div>
+    </body>
+</html>
