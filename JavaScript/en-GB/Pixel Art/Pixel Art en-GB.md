@@ -113,4 +113,33 @@ function setup() {
 ```
 
 Is that it?<br>
-We have split the two parts of this function into two further functions.
+We have split the two parts of this function into two further functions so the __setup__ function itself it quite small, but we can see very clearly what it does becase the other two functions have discriptive names.
+
+### Setup the pens
+
+The first step inside the __setup__ function is to setup the pens.<br>
+We already know what name we are going to give to our function, so let's code it now:
+
+```JavaScript
+function setupPens() {
+    var container = document.getElementById('pens-container');
+    penColours.forEach(function (colour) {
+
+    });
+}
+```
+
+Now after the `penColours.forEach(function...` we are going to type the code to create a new `<div>` and diplay that inside our container on the page:
+
+```JavaScript
+var div = document.createElement('div');
+div.className = 'pen';
+div.style.backgroundColor = colour;
+div.onclick = () => setPenColour(colour);
+container.appendChild(div);
+```
+
+This code is pretty self-explanitory and easy to understand, but one statement that might confuse you is the `div.onclick =...` statement.
+
+Here we are saying that when the div is clicked upon, we want to call another function called __setPenColour__ which we are calling with the colour that our `forEach` function gives us.<br>
+The __setPenColour__ function is contained in another funnction, here we are using __Arrow Functions__, we do this because the div element does not know which colour to set the pen to and so the __click__ event cannot call the function directly.

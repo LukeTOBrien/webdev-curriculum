@@ -229,15 +229,26 @@ What we need is a way to check to see is an answer exists, and if it does, chang
 
 ```JavaScript
 if (me[thing]) {
-    var prop = me[thing];
-    if (prop.push) {
-        me[thing] = prop.concat([ value ]);
+    var property = me[thing];
+    if (Array.isArray(property)) {
+        me[thing] = property.concat([ value ]);
     } else {
-        me[thing] = [ prop, value ];
+        me[thing] = [ property, value ];
     }
 } else {
     me[thing] = value;
 }
 ```
 
-This code is a little bit complicated 
+This code is a little bit complicated but if we go though it slowly we can understand it.
+
+1) First we check to see if something is there - `if(me[thing])`
+2) If there is somthing there, then we assign it to a new varible - `var prop`
+3) We then test to see if it is an __Array__ using the function `Array.isArray`<br>
+__Note:__ Read more about the [Array.isArray function here](https://www.w3schools.com/jsref/jsref_isarray.asp)
+4) It it is an array, then we are wrapping the entered value in a new array and using the __Array.concact__ function to build a new array with our existing array (_prop_), we are then assigning this new array into our __me__ object.<br>
+__Note:__ Read more about the [concact function here](https://www.w3schools.com/jsref/jsref_concat_array.asp)
+5) If the property is not an array, then we are wrapping the property and the entered value into a new array which we are assigning in place to our __me__ object.
+6) If the first __if__ statement doesn't find anything, then we are assigning the entered value in place inside the __me__ object.
+
+Phew that was hard, if you understand that then you ar a star.
