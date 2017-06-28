@@ -143,3 +143,48 @@ This code is pretty self-explanitory and easy to understand, but one statement t
 
 Here we are saying that when the div is clicked upon, we want to call another function called __setPenColour__ which we are calling with the colour that our `forEach` function gives us.<br>
 The __setPenColour__ function is contained in another funnction, here we are using __Arrow Functions__, we do this because the div element does not know which colour to set the pen to and so the __click__ event cannot call the function directly.
+
+### Setup the grid
+
+Let's create the `setupGrid` function now.<br>
+Type the 
+
+```JavaScript
+function setupGrid() {
+}
+```
+
+The first thing we want to do is to create a varible that is a reference of our grid container on our page.<br>
+Type the following code as the first statement of the `setupGrid` function:
+
+```JavaScript
+var container = document.getElementById('grid-container');
+```
+Now let's create the grid itself.<br>
+Our grid is made up of __rows__ and __columns__.<br>
+Let's start by looping around the __rows__.<br>
+
+```JavaScript
+// r for Rows
+for (var r = 0; r < gridSize.rows; r++) {
+    var row = document.createElement('div');
+    row.className = 'row';
+}
+```
+
+In this loop we are starting at 0 and continuing until we reach the end of the rows
+
+Now let's type the __columns__ loop:
+
+```JavaScript
+// c for Columns
+for (var c = 0; c < gridSize.columns; c++) {
+    var pixel = document.createElement('div');
+    pixel.className = 'pixel';
+    pixel.onclick = setPixelColour.bind(null, pixel);
+    row.appendChild(pixel);
+}
+container.appendChild(row);
+```
+
+After the loop has completed we need to add the __row__ to the __container__ using the statement `container.appendChild(row)`
