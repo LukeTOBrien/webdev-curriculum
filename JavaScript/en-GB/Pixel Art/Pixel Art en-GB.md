@@ -181,10 +181,41 @@ Now let's type the __columns__ loop:
 for (var c = 0; c < gridSize.columns; c++) {
     var pixel = document.createElement('div');
     pixel.className = 'pixel';
-    pixel.onclick = setPixelColour.bind(null, pixel);
+    pixel.onclick = setPixelColour.bind(pixel);
     row.appendChild(pixel);
 }
+```
+
+This code is pretty straight foreword and self-explainetory.<br>
+Here we are creating a new pixel (which is a `div`),  and assigning a function to it's `click` event, then we are adding that pixel to the row.
+
+One thing that might not seem obvious is the statement that is assigning the `click` event.<br>
+Here we are calling another function called __bind__, in doing this we are saying that we want to bind our pixel to the `setPixelColour` function.<br>
+The function __bind__ will return a new function the the `click` event can call.
+
+__Note:__ Read more about the [__bind__ function here](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind)
+
+After the loop has completed we need to add the __row__ to the __container__, so type the following statement after the loop:
+
+```JavaScript
 container.appendChild(row);
 ```
 
-After the loop has completed we need to add the __row__ to the __container__ using the statement `container.appendChild(row)`
+### Create the event functions
+
+Now for the easy part!
+
+First let's create the function that will set the pen colour.<br>
+Type the following code after all you other functions:
+
+```JavaScript
+function setPenColour(colour) {
+    penColour = colour;
+}
+```
+
+```JavaScript
+function setPixelColour() {
+    this.style.backgroundColor = penColour;
+}
+```

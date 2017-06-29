@@ -58,7 +58,7 @@
                 for (var c = 0; c < gridSize.columns; c++) {
                     var pixel = document.createElement('div');
                     pixel.className = 'pixel';
-                    pixel.onclick = setPixelColour.bind(null, pixel);
+                    pixel.onclick = setPixelColour.bind(pixel);
                     row.appendChild(pixel);
                 }
                 container.appendChild(row);
@@ -69,8 +69,8 @@
             penColour = colour;
         }
 
-        function setPixelColour(pixel) {
-            pixel.style.backgroundColor = penColour;
+        function setPixelColour() {
+            this.style.backgroundColor = penColour;
         }
     </script>
 </head>
