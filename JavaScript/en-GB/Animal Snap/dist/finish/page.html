@@ -1,0 +1,77 @@
+<html>
+    <head>
+            <style>
+        #card-container {
+            display: table;
+            border-spacing: 1px;
+            background-color: black;
+            border: 5px solid black;
+        }
+        
+        .row {
+            display: table-row;
+        }
+        
+        .card {
+            display: table-cell;
+            background-color: white;
+            width: 40px;
+            height: 40px;
+        }
+        
+        .pen {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 2px solid black;
+        }
+    </style>
+        <script>
+            var imgFolder = "img/";
+            var numMatchesNeeded = 2;
+            var animals = [
+                { name : "horse"},
+                { name : "sheep"},
+                { name : "pig" },
+                { name : "cow" }
+            ];
+
+            function setupGrid() {
+                var container = document.getElementById('card-container');
+                var goRound =animals.length;
+                // r for Rows
+                for (var r = 0;r<goRound;r++) {
+                    var row = document.createElement('div');
+                    row.className = 'row';
+                    // c for columns
+                    for (var c = 0;c<goRound / 2;c++) {
+                        var card = document.createElement('div');
+                        card.className = "card";
+                        var animal =GetAnimalCard();
+                        card.innerHTML =animal.name;
+                        row.appendChild(card);
+                        if (animal.numberInGrid) {
+                            animal.numberInGrid++;
+                        } else {
+                            animal.numberInGrid = 1
+                        }
+                    }
+                    container.appendChild(row);
+                }
+            }
+
+            function GetAnimalCard() {
+                var animal;
+                do {
+                    var rand = Math.floor(Math.random() * animals.length);
+                    animal = animals[rand];
+                } while (animal.numberInGrid && animal.numberInGrid == numMatchesNeeded);
+                return animal;
+            }
+
+        </script>
+    </head>
+    <body onload="setupGrid()">
+        <div id="card-container"></div>
+    </body>
+</html>

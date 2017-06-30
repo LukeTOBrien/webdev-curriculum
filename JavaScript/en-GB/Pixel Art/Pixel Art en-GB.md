@@ -219,3 +219,16 @@ function setPixelColour() {
     this.style.backgroundColor = penColour;
 }
 ```
+
+# Challenge
+
+Add some more colour to our list.<br>
+Because we are looping each of our colours in code with the `penColours.forEach(function...` statement adding more colours is easy.
+
+Add the name of another colour as a new element to the `penColours` array.<br>
+You can find a [list of colours to choose from here](https://www.w3schools.com/cssref/css_colors.asp) just pick some to add to the array.
+
+# End of lesson
+
+That's great, now we have a nice application that allows us to create pikel art with different colours.<br>
+Enjoy your artwork and relax!

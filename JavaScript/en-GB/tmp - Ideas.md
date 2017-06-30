@@ -6,6 +6,15 @@ Form
 Race - Buttons/Images
 + Player.x =+ random()
 + Challenge: Giving odds
+Pirate memory game
++ List of images displayed in a grid
++ Flip over two cards, if they are the same then keep open.
++ Keep going  until all cards are open
++ Challenge - Add another player
+Canvas paint
++ Toolbar with different shaped bruses
++ Pallet with differnt colour
++ Clear button
 AJAX
 + Explain HTTP (POST, GET, PUT, DELETE)
 + Explain HTTP status codes
