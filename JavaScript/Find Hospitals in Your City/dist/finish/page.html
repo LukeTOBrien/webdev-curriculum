@@ -2,13 +2,19 @@
     <head>
         <script src="js/jquery.js"></script>
         <script>
-            // http://api.jquery.com/jquery.ajax/
-            function search() {
-                var term = document.getElementById('term').nodeValue;
+            var corsProxy = "https://crossorigin.me/";
+            var rootUrl = "https://data.gov.uk/data/api/service/health/hospitals";
 
-                $.ajax("www.wikipedia.org", {
-                    method: "GET",
-                    data : { term: term },
+//https://data.gov.uk/data/api/health
+//partial_postcode=
+            // http://api.jquery.com/jquery.ajax/
+            // https://www.mediawiki.org/wiki/API:Query
+            function search() {
+                var term = document.getElementById('term').value;
+
+                $.ajax(corsProxy + rootUrl, {
+                    type: "GET",
+                    data : { city : term },
                     success : displayData,
                     error : displayError
                 })
@@ -16,7 +22,8 @@
 
             function displayData(data, textStatus, jqXHR) {
                 var output = $('#output');
-                output.html(data);
+                console.log(data);
+                output.html(data.parse.wikitext["*"])
             }
 
             function displayError(jqXHR, textStatus, errorThrown) {

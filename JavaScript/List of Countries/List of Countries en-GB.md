@@ -293,7 +293,54 @@ Here we are creating a `<img>` element which we are adding to our already create
 We are using the __img__ property to set the source (`src`) of the image to display that country.<br>
 Read about the (img element here)[https://www.w3schools.com/jsref/dom_obj_image.asp]
 
-## Challange 2 - Reorganising
+## Challange 2 - For loop the Functional way..
+
+When we write code to create our programs, those programs can become very big and so the code we will have to write a lot os code.<br>
+We can organise our code into functions that perform a task, this makes sense to us and makes our code easily understandable, so the function `displayCountries` does exactly that, it displays the countries on screen.<br>
+Sometimes when programs get much bigger we might want to perform more then one task, we might want to display the countries and then calculate their populations for example.<br>
+It could be tempting to write the code for both of these tasks in the same function, but then our `displayCounties` function would perform two tasks and it would no longer have a single purpose.
+
+__Functional Programming__ is creating function that perform only one task and only have a single purpose.<br>
+So taking our example, if we wanted to perform the two task of displaying the counties and calculating their populations, what do you suppose we would do?<br>
+We need to look at the problem and woprk out exactly what we want to do, Actually there are three tasks that we need to perfom
+
+1) First we want to loop aroung each counry
+2) Inside the loop we want to display that country on screen
+3) Then also inside the loop, we want to calculate the countries population
+
+So using __Functional Programming__ our code might look something like this:
+
+```JavaScript
+countries.forEach(function(country) {
+    displayCountry(country);
+    calculatePopulation(country);
+});
+```
+
+Remember that `countries` is an array of our country objects.<br>
+JavaScript has a nice little function called __forEach__, this is instead of _for loop_ in code, but it does a simular thing, the __forEach__ function is saying that for each item in the array we want to perform a given function.<br>
+__Note:__ You can read more about the [forEach function here](https://www.w3schools.com/jsref/jsref_forEach.asp)
+
+### What about our code?
+
+Oh yes of course, I had almost forgot.<br>
+Inside our `displayCountries` function we can replace our _for loop_ with the functional __forEach__ by writting the following code:
+
+```JavaScript
+countries.forEach(function(country) {
+    var div = document.createElement('div');
+
+    div.style.width = 200
+    div.style.display = "inline-block"
+
+    var img = document.createElement('img');
+    img.src = country.img;
+
+    div.appendChild(img);
+
+    container.appendChild(div);
+});
+```
 
 # End of lesson
 

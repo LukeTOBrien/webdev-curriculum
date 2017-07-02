@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <script>
+        var countries = [
+            { name: "Bermuda", img: "img/bermuda.png" },
+            { name: "Bhutan", img: "img/bhutan.png" },
+            { name: "Fiji", img: "img/fiji.png" },
+            { name: "Galapagos", img: "img/galapagos.png" }
+        ];
+
+        function displayCountries() {
+            var container = document.getElementById("country-container");
+            countries.forEach(function(country) {
+                var div = document.createElement('div');
+
+                div.style.width = 200
+                div.style.display = "inline-block"
+
+                var img = document.createElement('img');
+                img.src = country.img;
+
+                div.appendChild(img);
+
+                container.appendChild(div);
+            });
+
+        }
+    </script>
+</head>
+
+<body onload="displaycountries()">
+    <div id="country-container">
+    </div>
+</body>
+
+</html>
