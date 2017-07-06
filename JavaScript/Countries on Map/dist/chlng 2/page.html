@@ -19,16 +19,27 @@
                 zoom: 3
             });
             
-            countries.forEach(DisplayCountryOnMap);
+            countries.forEach(DisplayCountryOnMap)
         }
 
         function DisplayCountryOnMap(country) {
-            new google.maps.Marker({
+            var marker = new google.maps.Marker({
                 position: country.location,
                 map: map,
                 label: country.name,
-                icon : country.img
+                icon : country.img,
+                
             });
+            marker.addListener('click', function() {
+                console.log("Here")
+                DisplayCountryInfo.call(marker, country);
+            });
+        }
+
+        function DisplayCountryInfo(country) {
+            var html = '<iframe width="400px" height="400px" src="http://en.wikipedia.org/wiki/' + country.name + '"></iframe>';
+            var window = new google.maps.InfoWindow({ content : html });
+            window.open(map, this);
         }
 
     </script>

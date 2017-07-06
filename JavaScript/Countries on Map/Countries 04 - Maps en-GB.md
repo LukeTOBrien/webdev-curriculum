@@ -9,18 +9,24 @@ stylesheet: web
 
 # Introduction { .intro}
 
-In this lesson we will add a __location__ property to our countries and display their locations on a map.<br>
+In this lesson we will display a list of counties onto a map using a special __location__.<br>
 There are many different maps on the internet, but we are going to be using Google Maps.<br>
 __Note:__ You can read about [Google Maps here](https://www.w3schools.com/graphics/google_maps_intro.asp)
 
-First of all we will have to make some changes too our page.
+First of all let us type a basic page.
 
-# Changes to `page.html`
+# Creating our basic page
 
-We will need to make three changes to our page.
-1) Reference Google Maps
-2) Add a button
-3) Adding the output `<div>`
+Let's create our basic page:
+
+```HTML
+<html>
+    <head>
+    </head>
+    <body>
+    </body>
+</html>
+```
 
 ## Reference Google Maps
 
@@ -32,54 +38,34 @@ At the top of your page, inside the `<head>`, place the following code:
 ```
 
 Here we are saying that we want to include a new script with it's source at the Google Maps website.<br>
-```
-If you are curious, API stands for Application Programming Interface
-```
 
-## Add a button
+> If you are curious, API stands for __Application Programming Interface__
 
-Before we can add a button, we need a place where we can put it, what shall we call it?<br>
-That's correct, let's call it `button-panel`.<br>
-Type the following code underneath the `countries-container`.
+## `load` event and container
 
-```HTML
-<div id="button-panel">
-</div>
-```
+So we want our page to display the countries on a map when it first load up, to do this we type the name of the function that will display the country for the __onclick__ event on the `<body>` of our page.<br>
+But that is not all, we also need a container that will be the place where we place our countries.
 
-Now we can add a button to our button panel.<br>
-When we click on this button, it will display the selected country location on a map.<br>
-Place the following `<button>` element inside your button panel.
+Copy the follow markup into your page:
 
 ```HTML
-<div id="button-panel">
-    <button onclick="displayCountryLocation()">Display Location</button>
-</div>
+<body onload="displayCountries()">
+    <div id="countries-container" style="width:100%;height:100%;">
+    </div>
+</body>
 ```
 
-Here we are creating a new `<button>` that says "Display Location" and we type the name of the function that will display the country for the __onclick__ event.<br>
+That's it, now let's add the script to make it work!
 
-## Adding the output `<div>`
+# Adding the script
+## Array of countries
 
-We need a place to put our map once the button is pressed.<br>
-We will now add a new `<div>` element underneath the button panel.
-
-```HTML
-<div id="output" style="width:100%;height:400px;">
-</div>
-```
-
-That is all the changes we have to make in our HTML page, now let's add the script to make it work!
-
-# Changes to `countries.js`
-## Add each country's location
-
-Let's add a new property to each country, this property will be called __location__ and it will be an object made up of two more properties: __lat__ and __lng__:
+Let's create a list of countries we will use to display on our map, our countries will all have a special property, this property will be called __location__ and it will be an object made up of two more properties: __lat__ and __lng__:
 
 ```JavaScript
 location : {
-     lat : -7.477825,
-     lng : 178.679838
+     lat : ...,
+     lng : ...
 }
 ```
 
@@ -94,113 +80,111 @@ Once you have clicked on the button, a window will appear at the bottom of the s
 ![screenshot](res/maps-here.png)
 
 Now you know how to find your own latitude and longitude coordinates, you can use your own coordinates or use to ones in this lesson.<br>
-Here are some example coordinates:
+Here are the full list of countries with their __location__ properties:
 
 ```JavaScript
 var countries = [
-    { name : "Bermuda", ... location : { lat : 32.318942, lng -64.749584 } },
-    { name : "Bhutan", ... location : { lat : 27.395674, lng : 90.449783 } },
-    { name : "Fiji", ... location : { lat : -17.496026, lng : 178.724850 } },
-    { name : "Galapagos", ... location : { lat : -0.526364, lng: -90.691124 } }
+    { name: "Bermuda", img: "img/bermuda.png", location: { lat: 32.318942, lng: -64.749584 } },
+    { name: "Bhutan", img: "img/bhutan.png", location: { lat: 27.395674, lng: 90.449783 } },
+    { name: "Fiji", img: "img/fiji.png", location: { lat: -17.496026, lng: 178.724850 } },
+    { name: "Galapagos", img: "img/galapagos.png", location: { lat: -0.526364, lng: -90.691124 } }
 ];
 ```
 
-Now that we have the country objects set up, let's move on to the function that will display these locations on a map.
-
-# Changes to `script.js`
-
-Let's add a empty `displaycountryLocation()` function that we will add code to later:
+We also need a varible that we will use to store our map, we do not assign anything to it yet, just creatte it so that we can use it later on.
 
 ```JavaScript
-function displaycountryLocation() {
+var map;
+```
+
+Now that we have the countries created, let's move on to the function that will display these locations on a map.
+
+# Main `displayCountries` function
+
+Let's add a empty `displayCountries()` function that we will add code to later:
+
+```JavaScript
+function displayCountries() {
 
 }
 ```
 
 So now that we have our function in place, let's think about what we want to put in it.<br>
 Let's break our function down, what do we want to do?
-1) Get the selected country.
+1) Create the map
 2) Display the selected country's location a map
 
 Okay so we can see that there are two things that we want to do in our function, let's take them in turn.
 
-## Get the selected country
+## Create the map
 
-So let's now create a function that we will use to get the selected country.
+Normally we would create a function for each step, but it is okay to put this code in our main function.<br>
+Type the following code in you `displayCountries` function:
 
 ```JavaScript
-function getSelectedcountry() {
-    return countries.find(function(country) {
-        return country.isSelected
+var container = document.getElementById("countries-container");
+map = new google.maps.Map(container, {
+    center : { lat : 0, lng : 0 },
+    zoom: 2
+});
+```
+
+This might look a little bit complicated, but we actually have only two statements, let's see what is going on.<br>
+
+1) In the first statement we are getting a refference to our `container` and assigning that to a new varible.<br>
+2) In the secound statement we are creating a [Google Maps Object](https://developers.google.com/maps/documentation/javascript/3.exp/reference#Map), we are giving it our `container`.<br>
+We are also giving the `Map()` function a configuration object that has two properties: center and zoom.<br>
+We wish to centre the map just beyond the centre or the earth so we create a special __location__ object that is set to 0 and assign it to the `center` property in the configuration object.<br>
+We also set the `zoom` property because we want to to be able to see all of our countries.<br>
+
+Now our main function looks like this:
+
+```JavaScript
+function displayCountries() {
+    var container = document.getElementById("countries-container");
+    map = new google.maps.Map(container, {
+        center : { lat : 0, lng : 40 },
+        zoom: 2
     });
 }
 ```
-
-This might look a little bit complicated, we have two return statements, let's see what is going on.<br>
-
-+ In the first return statement we are calling the function __find()__ that is a function of the Array object (countries is an Array)<br>
-__Note:__ You can read more about the [find() function here](https://www.w3schools.com/jsref/jsref_find.asp)
-+ The second return statement is inside the find function, we want to find the country that is selected, so inside the find() function we create another function that take a country and returns it's `isSelected` property<br>
-This function will be called for every country untill a selected country is found.
-
-So now let's use our new function in our main function:
-
-```JavaScript
-function displaycountryLocation() {
-    var selectedcountry = getSelectedcountry();
-}
-```
-
-Here we are creating a new varible that is assigned to the return result of the `getSelectedcountry()` function.<br>
 
 So that's the first part of our function done, now on to the second.
 
-## Display selected country's location on a map
+## Mark the country on the map
 
 Now we move on to creating the second part.<br>
-Let's also create this part as a new seperote function.<br>
+We want to display a given country on the map, so let's create a new function called `displayCountryOnMap`.<br>
 
 ```JavaScript
-function displaySelectedcountryOnMap(selectedcountry) {
-    var output = $("#output");
-    var map = new google.maps.Map(output[0], {
-        center: country.location,
-        zoom: 8
+function DisplayCountryOnMap(country) {
+    new google.maps.Marker({
+        position: country.location,
+        map: map,
+        label: country.name,
+        icon : country.img
     });
 }
 ```
 
-In this code there are two statement (two semi-colons (`;`)).<br>
-Let's take a look at what each statement is doing.<br>
+Here we are jus creating a new marker using the [Google Maps Marker object](https://developers.google.com/maps/documentation/javascript/3.exp/reference#marker)<br>
+The Marker object also takes a configuration object, we are setting the congfiguration object's properties using the country's location, name and img properties, we are also telling the Marker that the map we want to use is our `map` varible.<br>
 
-+ In the first statement we get a reference of our "output" `<div>` element that is on our page.<br>
-Remember we do this by using the special `$()` symbol arround the ID of the element.
-+ In the secound statement we are creating a [Google Maps Object](), we are giving it our "output" `<div>` element by using the special array index symbol on our varible (`output[0]`).<br>
-We are also giving the `Map()` function a configuration object that has two properties: center and zoom.<br>
-We wish to centre the map on the country's location, so we assign the `country.location` property to the `center` property in the configuration object.<br>
-We also set the `zoom` property because we want to zoom our map into the country's location.<br>
-
-Now that we have created our, we can now use it in our main function.<br>
-Place the code to call our newly created function after we get our selected country:
+Now that we have created this function, let's call it in our main function<br>
+We call the function by passing it into the `forEach` function of of our `countries` array.<br
+__Note:__ You can read more about the [forEach function here](https://www.w3schools.com/jsref/jsref_forEach.asp)<br>
+Type the following code at the end of your main `displayCountries` function:
 
 ```JavaScript
-function displaycountryLocation() {
-    var selectedcountry = ...
-    displaySelectedcountryOnMap(selectedcountry);
-}
+countries.forEach(DisplayCountryOnMap);
 ```
 
-Here we are calling our function and giving it our selected country.
+Here we are saying that for each country in our array, we want to display it on the map, simple!
 
 # It works!
 
 Now we have created all the parts for our main function, let's save our work and open up the page in a web browser.<br>
-To test that everything is working, click on a country to select it and then click on the "Display Location" to display a map with the selected country's location.
-
-But there is one problem.<br>
-Not every selected country is displayed on the map, if we select more than one country, we would like all of the country locations displayed on the map, not just one.
-
-Let's make the changes so that all countries are displayed.
+Our map displays and we can see all of our countries marked out.
 
 ## Get all selected countries
 

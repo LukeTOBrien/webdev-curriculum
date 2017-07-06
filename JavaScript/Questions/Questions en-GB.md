@@ -160,10 +160,16 @@ __Note:__ Red more about [outputting data here](https://www.w3schools.com/js/js_
 In our browser, we can see the console outpt by pressing the __F12__ key on your keyboard.<br>
 Once you press __F12__ you will see a screen pop up like the one below:
 
-TODO: Insert console screenshot in Chrome and Edge
+![screenshot](res/console.png)
 
 Inside the screen you can see many tabs that contain different screen, but the one we are interested in is the __Console__ screen.<br>
 The console screen displays output from the `console.log()` statement and also any error that may occour.
+
+In our code, we logged the `me` object to the console, so in the screenshot above we can see the object and it's properties.<br>
+There is also a strange property called `__proto__` which we did not set ourselves.<br>
+This `__proto__` object is actually something called a __prototype__, but we do not have to worry about this, just to say that this is another object that exists and is automaticly created.
+
+__Note:__ You can read more about [prototypes here](https://www.w3schools.com/js/js_object_prototypes.asp)
 
 ## Running our code
 
