@@ -23,6 +23,8 @@ AJAX
 Defered Object
 + Use a timer and complete a object
 
+Copy the Pyhon ones
+
 # CSS
 Peek-a-boo
 + Using a checkbox to show/hide a picture

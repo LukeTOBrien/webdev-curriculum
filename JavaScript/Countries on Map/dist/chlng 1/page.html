@@ -7,7 +7,8 @@
             { name: "Bermuda", img: "img/bermuda.png", location: { lat: 32.318942, lng: -64.749584 } },
             { name: "Bhutan", img: "img/bhutan.png", location: { lat: 27.395674, lng: 90.449783 } },
             { name: "Fiji", img: "img/fiji.png", location: { lat: -17.496026, lng: 178.724850 } },
-            { name: "Galapagos", img: "img/galapagos.png", location: { lat: -0.526364, lng: -90.691124 } }
+            { name: "Galapagos", img: "img/galapagos.png", location: { lat: -0.526364, lng: -90.691124 } },
+            { name: "United Kingdom", img: "img/bermuda.png", location: { lat: 54.4278109, lng: -4.3659038 } }
         ];
 
         var map;
@@ -19,26 +20,16 @@
                 zoom: 3
             });
             
-            countries.forEach(DisplayCountryOnMap)
+            countries.forEach(DisplayCountryOnMap);
         }
 
         function DisplayCountryOnMap(country) {
-            var marker = new google.maps.Marker({
+            new google.maps.Marker({
                 position: country.location,
                 map: map,
                 label: country.name,
-                icon : country.img,
-                
+                icon : country.img
             });
-            marker.addListener('click', function() {
-                DisplayCountryInfo.call(marker, country);
-            });
-        }
-
-        function DisplayCountryInfo(country) {
-            var html = '<iframe width="400px" height="400px" src="http://en.wikipedia.org/wiki/' + country.name + '"></iframe>';
-            var window = new google.maps.InfoWindow({ content : html });
-            window.open(map, this);
         }
 
     </script>

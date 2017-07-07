@@ -69,6 +69,11 @@
                 return animal;
             }
 
+            function openCard(animal) {
+                this.className = "open";
+                animal.numberOpen = 1
+            }
+
         </script>
     </head>
     <body onload="setupGrid()">

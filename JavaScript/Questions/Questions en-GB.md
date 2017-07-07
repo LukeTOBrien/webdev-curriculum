@@ -183,7 +183,7 @@ TODO: Object inside console screen
 
 # Challanges
 
-## 1 - Different types of questions
+## Challange 1 - Different types of questions
 
 Let's ask a different question about ourselves, this question will be about our abilities.<br>
 Copy the following code into your `<script>` block to create a new function:
@@ -228,7 +228,7 @@ After you have done this, save your work and run it again, you should now have t
 __Note:__ In the above `message` we are using __Special Charecters__ and __Breaking Long Code Lines__.<br>
 [Read more about strings here](https://www.w3schools.com/js/js_strings.asp)
 
-## 2 - Many of the same thing
+## Challenge 2 - Many of the same thing
 
 There is a problem in our code, if we have two things of the same type (two comics) but we have two different anwsers (Batman and Spiderman) then the first answer will be overwitten by the second.<br>
 What we need is a way to check to see is an answer exists, and if it does, change the object's property into and array of answers rather than just a single answer.<br>
@@ -258,3 +258,5 @@ __Note:__ Read more about the [concact function here](https://www.w3schools.com/
 6) If the first __if__ statement doesn't find anything, then we are assigning the entered value in place inside the __me__ object.
 
 Phew that was hard, if you understand that then you ar a star.
+
+# End of lesson

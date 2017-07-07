@@ -186,91 +186,83 @@ Here we are saying that for each country in our array, we want to display it on 
 Now we have created all the parts for our main function, let's save our work and open up the page in a web browser.<br>
 Our map displays and we can see all of our countries marked out.
 
-## Get all selected countries
+# Challanges
+## Challenge 1 - Add your own country
 
-Let's create another function to get all selected countries.<br>
-Type the following code:
+This challange is very simple, all we need to do is to add a new object onto our `countries` array.<br>
+Type the following code onto the end of your `countries` array, remember to add a comma (`,`) to the end of the pervious item:
 
 ```JavaScript
-function getAllSelectedcountries() {
-    return countries.filter(function(country) {
-        return country.isSelected
-    });
+{ name: "United Kingdom", img: "img/bermuda.png", location: { lat: 54.4278109, lng: -4.3659038 } }
+```
+
+That's it, challenge completed!<br>
+Your array of countries should look like the following:
+
+```JavaScript
+var countries = [
+    { name: "Bermuda", img: "img/bermuda.png", location: { lat: 32.318942, lng: -64.749584 } },
+    { name: "Bhutan", img: "img/bhutan.png", location: { lat: 27.395674, lng: 90.449783 } },
+    { name: "Fiji", img: "img/fiji.png", location: { lat: -17.496026, lng: 178.724850 } },
+    { name: "Galapagos", img: "img/galapagos.png", location: { lat: -0.526364, lng: -90.691124 } },
+    { name: "United Kingdom", img: "img/bermuda.png", location: { lat: 54.4278109, lng: -4.3659038 } }
+];
+```
+
+## Challange 2 - Info window
+
+This challenge is a little bit bigger than the last.
+
+We're going to add a `click` event to our markers, this click event will then open up an information window that will display a Wikipedia article about the counrty.<br>
+Let's create a new function that will display the country's information:
+
+```JavaScript
+function DisplayCountryInfo(country) {
+    var html = '<iframe width="400px" height="400px" src="http://en.wikipedia.org/wiki/' + country.name + '"></iframe>';
+    var window = new google.maps.InfoWindow({ content : html });
+    window.open(map, this);
 }
 ```
 
-This is a simple change to our previous function.<br>
-All we have done here is change the name of our function, `getAllSelectedcountries` is a nice descriptive name, and we are now using the `filter` function of our `countries` array.<br>
-The filter function will return all the selected countries rather then just the first one it finds.<br>
-__Note:__ Read more about the [filter() function here](https://www.w3schools.com/jsref/jsref_filter.asp)
+1) In the first statement of this function (`var html = ...`) we are creating the content of our information window, we are saying that we would like to dispolay a `iframe` that is pointing to the Wikipedia article about our country.<br>
+Notice how we are constucting the `HTML` varible with both single and double quotes (`'` and `"`), this is so our browser does not become confussed, we are using matching single quotes on the outside and double quotes on the inside.
+2) In the second statement we are constructing our [Google Map InfoWindow object](https://developers.google.com/maps/documentation/javascript/3.exp/reference#InfoWindow), this function also takes in another configuration object, here we are assigning the window's content to the HTML we have just created.
+3) Lastly we are opening the window by calling it's __open__ function, we are giving it our `map` object and also using the special __this__ keyword which is _this_ marker that we have clicked on.
 
-## Changing the displayOnMap function
-
-This change is a little bit bigger than the last.
-
-The first change we want to make is to move the `map` varible outside of the `displaySelectedcountryOnMap` function.<br>
-Then we want to add a `if` arround the `Google Map` function call.<br>
-Replace your `displaySelectedcountryOnMap` function with the following code:
-
+Next we need to create a `marker` oject and add a event listener to to it.<br>
+But we are already creating a marker with the code `new google.maps.Marker(...)` in our function `DisplayCountryOnMap`, so all we need to do is assign that new marker to a virible:
 ```JavaScript
-var map;
-function displaySelectedcountryOnMap(country) {
-    var output = $("#output");
-    if (! map) {
-        map = new google.maps.Map(output[0], {
-            center: country.location,
-            zoom: 8
-        });
-    }
-}
+var marker = new google.maps.Marker(...)
 ```
 
-You can see that our `if` statement is saying "if not map" this means that "if the map is nothing or if map is empty", as we are not assigning anything to `map`, th `map` varible is empty.
-
-But this is not the only change that we want to make, we also want to add a marker on our map.<br>
-
-### Add a marker
-
-Now let's add a marker.<br>
-We want to do this inside our function, below the `map` if statement.<br>
-Type the following code:
+And then add a listener to it:
 
 ```JavaScript
-if (! map) {
-    ...
-}
-var marker = new google.maps.Marker({
-    position: country.location,
-    map: map,
-    label: country.name
+marker.addListener('click', function() {
+    DisplayCountryInfo.call(marker, country);
 });
 ```
 
-In this code above we are adding a new [Google Map Marker](https://developers.google.com/maps/documentation/javascript/examples/marker-simple).<br>
-The Marker object also takes a configuration object, we are setting the congfiguration object's properties using the country's location and name, we are also telling the Marker that the map we want to use is our `map` varible.<br>
+Here we are using the function __call__ the call our function.<br>
+Remember the special keyword __this__? By using the __call__ function we are are assigning the `marker` varible to the keywork __this__.<br>
+__Note:__ You can read more about the [call function here](https://www.w3schools.com/js/js_function_call.asp)
 
-The last thing we have to do is make changes to our main `displaycountryLocation` function.
-
-## Changes to displaycountryLocation function
-
-We are now going to make three changes to our main function.<br>
-Let's look at the following code:<br>
+So now our whole function looks like this:
 
 ```JavaScript
-function displaycountryLocation() {
-    map = null;
-    var selectedcountries = GetAllSelectedcountries();
-    selectedcountries.forEach(displaySelectedcountryOnMap);
+function DisplayCountryOnMap(country) {
+    var marker = new google.maps.Marker({
+        position: country.location,
+        map: map,
+        label: country.name,
+        icon : country.img,
+        
+    });
+    marker.addListener('click', function() {
+        DisplayCountryInfo.call(marker, country);
+    });
 }
 ```
-
-Our function is now made up of three statements:
-
-1) We are making sure the `map` varible is nothing (null in computer terms) by assign the special keyword 'null' to it.
-2) We are getting all the selected countries by calling our new function that returns all selected countries.
-3) We are calling the `forEach()` function of the `selectedcountries` array.<br>
-The `forEach` function does exactly the same as a `for...loop`, only it is easier to understand because it is a function.<br>
-__Note:__ Read more about the [forEach function here](https://www.w3schools.com/jsref/jsref_forEach.asp)
 
 # End of lesson
 
