@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    <script src="js/jquery.js"></script>
+    <script>
+        var corsProxy = "https://crossorigin.me/";
+        var rootUrl = "http://www.bbc.co.uk/nature/wildlife/by/latest.rss";
+
+        //https://data.gov.uk/data/api/health
+        //partial_postcode=
+        // http://api.jquery.com/jquery.ajax/
+        // https://www.mediawiki.org/wiki/API:Query
+        function getWildlifeList() {
+            $.ajax(corsProxy + rootUrl, {
+                type: "GET",
+                success: displayData,
+                error: displayError
+            })
+        }
+
+        function displayData(data, textStatus, jqXHR) {
+            console.log(data);
+            var output = $('#output');
+            output.html(textStatus);
+            var channel = $(data).find('channel');
+            outputChannel(channel, output);
+        }
+
+        function displayError(jqXHR, textStatus, errorThrown) {
+            var output = $('#output');
+            output.html(textStatus);
+        }
+
+        function outputChannel(channel, output) {
+            output.append(
+                $('<h1 />').text(channel.find('title:first').text())
+            );
+            output.append(
+                outputItems(channel)
+            );
+        }
+
+        function outputItems(channel) {
+            return $('<div />').append(
+                channel.find('item').map(
+                    displayItem
+                ).get()
+            )
+        }
+
+        function displayItem() {
+            var me = $(this);
+            var item = $('<div />');
+            item.append(
+                $('<h2 />').text(me.find('title').text())
+            ).append(
+                $('<div />').html(me.find('description').html())
+            ).append(
+                me.find('[url]').map(
+                    appendImage
+                ).get()
+            );
+            return item;
+        }
+
+        function appendImage() {
+            var thumbnail = $(this);
+            alert("Here")
+            var img = $('<img />');
+            img.css({
+                width: thumbnail.attr('width'),
+                height: thumbnail.attr('height')
+            });
+            img[0].src = thumbnail.attr('url');
+            return img;
+        }
+    </script>
+</head>
+
+<body>
+    <button id="search" onclick="getWildlifeList()">Search</button>
+    <div id="output">
+
+    </div>
+</body>
+
+</html>
