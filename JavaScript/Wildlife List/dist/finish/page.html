@@ -6,16 +6,12 @@
         var corsProxy = "https://crossorigin.me/";
         var rootUrl = "http://www.bbc.co.uk/nature/wildlife/by/latest.rss";
 
-        //https://data.gov.uk/data/api/health
-        //partial_postcode=
-        // http://api.jquery.com/jquery.ajax/
-        // https://www.mediawiki.org/wiki/API:Query
         function getWildlifeList() {
             $.ajax(corsProxy + rootUrl, {
                 type: "GET",
                 success: displayData,
                 error: displayError
-            })
+            });
         }
 
         function displayData(data, textStatus, jqXHR) {
@@ -45,7 +41,7 @@
                 channel.find('item').map(
                     displayItem
                 ).get()
-            )
+            );
         }
 
         function displayItem() {
@@ -54,18 +50,26 @@
             item.append(
                 $('<h2 />').text(me.find('title').text())
             ).append(
-                $('<div />').html(me.find('description').html())
+                $('<div />').html(me.find('description').each(
+                    createDescription
+                ).html())
             ).append(
                 me.find('[url]').map(
-                    appendImage
+                    createImage
                 ).get()
             );
             return item;
         }
 
-        function appendImage() {
+        function createDescription() {
+            $(this).find('a').each(function() {
+                var me = $(this);
+                me.attr('href', "http://www.bbc.co.uk" + me.attr('href'));
+            });
+        }
+
+        function createImage() {
             var thumbnail = $(this);
-            alert("Here")
             var img = $('<img />');
             img.css({
                 width: thumbnail.attr('width'),
@@ -74,6 +78,7 @@
             img[0].src = thumbnail.attr('url');
             return img;
         }
+
     </script>
 </head>
 
