@@ -33,7 +33,7 @@ Here we are telling our browser to use HTTP and to __Get__ the HTML page from th
 Did you know that a website address is actually called a __URL__?<br>
 __URL__ stands for _Universal Resourse Location_ - Notice the word `location`, anything can be at this location, not just an HTML page.
 
-In this lesson we are going to __Request__ our list or wildlife from the URL [http://www.bbc.co.uk/nature/wildlife/by/latest](http://www.bbc.co.uk/nature/wildlife/by/latest), go ahead and click on the address or copy it to your browser.<br>
+In this lesson we are going to __Request__ our list or wildlife from the URL [http://www.bbc.co.uk/nature/wildlife/by/latest.rss](http://www.bbc.co.uk/nature/wildlife/by/latest.rss), go ahead and click on the address or copy it to your browser.<br>
 Once you do, you will see something like this:
 
 ```XML
@@ -67,7 +67,12 @@ __XML__ has elements like HTML, but these elements can be anything, for example 
 Even though this data is not HTML, we can use this data to create HTML.<br>
 This is what we are going, __Request__ data and then use the data to create HTML for our page.
 
-# Create the basic page
+# Let's begin
+
+So now we know what we want to do, let's go ahead and get started.<br>
+The first thing we need to do is to create a basic page, so let's do that now!
+
+## Create the basic page
 
 First of all we need to create a basic page:
 
@@ -92,8 +97,35 @@ Now let's add a little bit of markup to our `<body>`:
 Here we have added a `<button>` that will call a function `getWildlifeList` when we click on it.<br>
 We have also added a `<div>` which we have givven an id of `output`, this will be where we place the Wildlife List when it returns from the Web Server.
 
-There is also a music JavaScript file that we need, in the folder called `js` (js for JavaScript) there should be a file called __jquery.js__
+There is also a magic JavaScript file that we need, in the folder called `js` (js for JavaScript) there should be a file called __jquery.js__.<br>
+Let's add a `<script>` element to our `<head>` and point it's `src` attribute to the __jQuery__ file:
 
 ```HTML
 <script src="js/jquery.js"></script>
 ```
+
+## Create the main function
+
+Let's create an new script block with a new empty function inside, remember we will name our function `getWildlifeList`.<br>
+Remember the __URL__ we are using is http://www.bbc.co.uk/nature/wildlife/by/latest.rss, so we will also need a varible that contains this __URL__.<br>
+Type the following code into the `<head>` section of your page:
+
+```HTML
+<script>
+var url = "http://www.bbc.co.uk/nature/wildlife/by/latest.rss";
+
+function getWildlifeList() {
+}
+</script>
+```
+
+Okay, that's not much, but it's a start, the next steps are a bit more complicated, so just take them slowly and ask you teacher if you need help.
+
+### Requsing data from the server
+
+Okay, so we want to __Request__ data from the __Server__ (which if bbc.co.uk).<br>
+So how do we __Request__ data?
+
+Well __jQuery__ the magic little JavaScript file that we added to our page has some helpful functions that we can use.<br>
+One of thouse functions is the __ajax__ function.
+
