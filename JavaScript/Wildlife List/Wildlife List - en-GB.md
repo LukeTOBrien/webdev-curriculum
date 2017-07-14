@@ -123,9 +123,71 @@ Okay, that's not much, but it's a start, the next steps are a bit more complicat
 
 ### Requsing data from the server
 
-Okay, so we want to __Request__ data from the __Server__ (which if bbc.co.uk).<br>
+Okay, so we want to __Request__ data from the __Server__ (which is bbc.co.uk).<br>
 So how do we __Request__ data?
 
-Well __jQuery__ the magic little JavaScript file that we added to our page has some helpful functions that we can use.<br>
+Well we do this using a technique called __Ajax__, Ajax stands for _ __A__syicronous __J__avaScript __A__nd __X__ml _.<br>
+__Ajax__ allows us to send a __Request__ to a __Web Server__ and to call a function once we recieve a __Response__.<br>
+The Asyncronous word mean that it does not cause our code to pause and wait for the response to come back, our code is free to perform other tasks.
+
+> __Note:__ You can read more about [Ajax here](https://www.w3schools.com/xml/ajax_intro.asp)
+
+Luckily __jQuery__ the magic little JavaScript file that we added to our page has some helpful functions that we can use.<br>
 One of thouse functions is the __ajax__ function.
+
+> __Note:__ You can read more about [the ajax fuction here](http://api.jquery.com/)
+
+So let's call the `ajax` function in our code:
+
+```JavaScript
+function getWildlifeList() {
+    $.ajax(url, {
+        type: "GET",
+        success: displayData,
+        error: displayError
+    });
+}
+```
+
+This is our entire `getWildlifeList` function, not very big is it?<br>
+In fact if you look closely it is only one statement long (one semi-colon `;`), but we are spacing it out like this so that it look nice and easy to read.<br>
+
+The first thing to notice is the `ajax` function is actually a function of the specal jQuery dollar object (`$`).<br>
+The `ajax` function hase two parameters, the __URL__ that the request will go to and a configuration object.<br>
+
+Here we are saying that the type of request we want to make is a __GET__ request, we are also specifing two function names in the configuration object, we are saying that when the request is a __success__ we want to call the `displayData` function and when the request returns a __error__ we want to call the `displayError` function.<br>
+At the moment we do not have those functions, so let's create them now.<br>
+Type the following code after your main `getWildlifeList` function:
+
+```JavaScript
+function displayData(data) {
+    console.log(data);
+}
+
+function displayError() {
+    var output = $('#output');
+    output.html("Oops!);
+}
+```
+
+So these functions are pretty simple to understand, right?<br>
+When the __Ajax__ __Request__ is a __success__, we want to call the `displayData` function that logs the data to the developer console.<br>
+When the __Ajax__ __Request__ is an __error__, we want to call the `displayError` funtion that will output "Oops!" on to the page.
+
+Let's save our work now and test out our page to see if it works.
+
+#### Oops!
+
+Well we didn't quite get "Oops!" displayed on our page, let's see what did happend by opening up our developer tools by pressing __F12__ on our keyboard and clicking on the console tab.
+
+TODO: CORS erroe
+
+> XMLHttpRequest cannot load http://www.bbc.co.uk/nature/wildlife/by/latest.rss. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'null' is therefore not allowed access.
+
+So this error is a bit strange, what does it mean?
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+
+
+http://api.jquery.com/attr/
 
