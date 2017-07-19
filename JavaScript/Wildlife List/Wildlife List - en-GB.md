@@ -186,8 +186,59 @@ TODO: CORS erroe
 
 So this error is a bit strange, what does it mean?
 
-https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+Well this is security built into our internet browser, it means that our __Origin__ (which means where we sent the __Request__ from, ie: The computer that you are using) is not allowed to access the __Web Server__ in this way.
 
+> For a more detail (Warning: Very technical) see https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
+
+So how can we solve the issue?<br>
+Well we can use a little trick called __JSONP__ which stands for _JSON with Padding_. ([Read more JSONP here](https://www.w3schools.com/js/js_json_jsonp.asp)).<br>
+But unfortuatly that won't work for us here, as the __Web Server__ is __Respond__ing with __XML__ and not __JSON__.
+
+So is there anything we can do?
+
+Well yes, we are going to use a __Proxy__, this is another __Web Server__ that will act like a middleman and safely relay our __Request__.<br>
+Add the following code to the top of your `<script>` block:
+
+```JavaScript
+var corsProxy = "https://crossorigin.me/";
+```
+
+Now let's change our call to `ajax` in our code to use the new __Proxy__:
+
+```JavaScript
+function getWildlifeList() {
+    $.ajax(corsProxy + url, {
+        ...
+```
+
+Now if we save our work an open it in our browser again, we should see the data logged into our console window:
+
+TODO: ConsoleWithWildlifeData
+
+If you leave the developer tools window open, you can then click on the __Network__ tab to see our __Request__:
+
+TODO: DeveloperToolsNetwork
+
+This is another complicated screen and we won't talk about it here, but it is nice to see what is happening.
+
+> https://www.w3schools.com/tags/ref_httpmessages.asp
+
+# End of lesson
+
+Phew there is an aweful lot to learn in this lesson, if you are confussed about anything then ask your teacher.
+
+# Challenges
+
+## Challenge 1 - Display the data
+
+It this challenge we are going to use the magic power of __jQuery__.<br>
+Unfortunatly this challenge is also going to be quite hard, so follow closely.
+
+
+
+
+
+TODO: Network tab
 
 http://api.jquery.com/attr/
 
