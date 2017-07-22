@@ -186,6 +186,8 @@ Here we are saying that for each country in our array, we want to display it on 
 Now we have created all the parts for our main function, let's save our work and open up the page in a web browser.<br>
 Our map displays and we can see all of our countries marked out.
 
+> There is also a nice tutorial from our [friends at W3Schools](https://www.w3schools.com/graphics/google_maps_intro.asp)
+
 # Challanges
 ## Challenge 1 - Add your own country
 
