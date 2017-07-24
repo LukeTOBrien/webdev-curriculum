@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <style>
+            canvas {
+                border:1px solid #d3d3d3;
+            }
+            .pen {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 2px solid black;
+        }
+        </style>
+        <script>
+            // https://www.w3schools.com/charsets/ref_utf_geometric.asp
+            // https://stackoverflow.com/questions/17130395/real-mouse-position-in-canvas
+            var offset;
+            var g;
+            var colours = ['red', 'chartreuse', 'blue', 'white', 'black'];
+            var options = {
+                brushSize : 10,
+                brushColour : 'black',
+                brushType : "circle"
+            };
+            var paintFunctions = {
+                "circle" : function(pos) {
+                    g.fillStyle = options.brushColour;
+                    g.beginPath();
+                    g.arc(pos.x, pos.y, options.brushSize, 0, 2 * Math.PI);
+                    g.closePath();
+                    g.fill();
+                },
+                "square" : function(x, y) {
+                    var halfSize = options.brushSize / 2;
+                    g.fillStyle = options.brushColour;
+                    g.fillRect(pos.x - halfSize, pos.y - halfSize, options.brushSize, options.brushSize);
+                }
+            }
+
+            function getOffset(x, y) {
+                return {
+                    x : x - offset.x,
+                    y : y - offset.y
+                };
+            }
+
+            function load() {
+                var canvas = document.getElementById('canvas');
+
+                canvas.width  = 800;
+                canvas.height = 600;
+                g = canvas.getContext('2d');
+
+                canvas.onmousedown = mouseDown;
+                canvas.onmousemove = mouseMove;
+
+                document.getElementById('brush-size')
+                    .onchange = setBrushSize;
+                document.getElementById('brush-type')
+                    .onchange = setBrushType;
+
+                setupColours();
+
+                offset = {
+                    x : canvas.offsetLeft,
+                    y : canvas.offsetTop
+                };
+            }
+
+            function setupColours() {
+            var container = document.getElementById('colours-container');
+            colours.forEach(function (colour) {
+                var div = document.createElement('div');
+                div.className = 'pen';
+                div.style.backgroundColor = colour;
+                div.onclick = () => setBrushColour(colour);
+                container.appendChild(div);
+            });
+        }
+
+            function setBrushSize() {
+                options.brushSize = this.value;
+            }
+
+            function setBrushType() {
+                options.brushType = this.value;
+            }
+
+            function setBrushColour(colour) {
+                options.brushColour = colour;
+            }
+
+            function mouseDown(event) {
+                isMouseDown = true;
+                if (event.button == 0) {
+                    paintFunctions[options.brushType](getOffset(event.clientX, event.clientY));
+                }
+            }
+
+            function mouseUp(event) {
+                isMouseDown = false;
+            }
+
+            function mouseMove(event) {
+                if (event.buttons == 1) {
+                    paintFunctions[options.brushType](getOffset(event.clientX, event.clientY));
+                }
+            }
+
+        </script>
+    </head>
+    <body onload="load()">
+        <div id="options-container">
+            <input id="brush-size" placeholder="Brush size..."/>
+            <select id="brush-type">
+                <option value="circle">&#9679</option>
+                <option value="square">&#9632</option>
+            </select>
+            <div id="colours-container">
+
+            </div>
+        </div>
+        <canvas id="canvas">
+
+        </canvas>
+    </body>
+</html>
