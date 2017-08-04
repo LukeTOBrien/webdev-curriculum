@@ -1,0 +1,99 @@
+<html>
+
+<head>
+    <script src="js/jquery.js"></script>
+    <script>
+        var corsProxy = "https://crossorigin.me/";
+        var url = "http://www.bbc.co.uk/nature/wildlife/by/latest.rss";
+
+        function getWildlifeList() {
+            $.ajax(corsProxy + url, {
+                type: "GET",
+                success: displayData,
+                error: displayError
+            });
+        }
+
+        function displayData(data) {
+            console.log(data);
+            var output = $('#output');
+            var channel = $(data).find('channel');
+            outputChannel(channel, output);
+        }
+
+        function displayError() {
+            var output = $('#output');
+            output.html("Oops!");
+        }
+
+        function outputChannel(channel, output) {
+            output.append(
+                $('<h1 />').text(channel.find('title:first').text())
+            )
+            .append(
+                channel.find('description:first').each(
+                    buildDescription
+                ).html()
+            )
+            .append(
+                outputItems(channel)
+            );
+        }
+
+        function buildDescription() {
+            $(this).find('a').each(function () {
+                var me = $(this);
+                me.attr('href', "http://www.bbc.co.uk" + me.attr('href'));
+                me.attr('target', '_blank');
+            });
+        }
+
+        function outputItems(channel) {
+            return $('<div />').append(
+                channel.find('item').map(
+                    createItem
+                ).get()
+            );
+        }
+
+        function createItem() {
+            var me = $(this);
+            return $('<div />')
+                .append(
+                    $('<h2 />').text(me.find('title').text())
+                )
+                .append(
+                    $('<div />').html(
+                        me.find('description').each(
+                            buildDescription
+                        ).html()
+                    )
+                )
+                .append(
+                    me.find('[url]').map(
+                        createImage
+                    ).get()
+                );
+        }
+
+        function createImage() {
+            var thumbnail = $(this);
+            var img = $('<img />');
+            img.css({
+                width: thumbnail.attr('width'),
+                height: thumbnail.attr('height')
+            });
+            img[0].src = thumbnail.attr('url');
+            return img;
+        }
+    </script>
+</head>
+
+<body>
+    <button id="search" onclick="getWildlifeList()">Search</button>
+    <div id="output">
+
+    </div>
+</body>
+
+</html>

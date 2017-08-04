@@ -16,74 +16,13 @@
 
         function displayData(data) {
             console.log(data);
-            var output = $('#output');
-            var channel = $(data).find('channel');
-            outputChannel(channel, output);
         }
 
         function displayError() {
             var output = $('#output');
             output.html("Oops!");
         }
-
-        function outputChannel(channel, output) {
-            output.append(
-                $('<h1 />').text(channel.find('title:first').text())
-            )
-            .append(
-                channel.find('description:first').each(
-                    createDescription
-                ).html()
-            )
-            .append(
-                outputItems(channel)
-            );
-        }
-
-        function outputItems(channel) {
-            return $('<div />').append(
-                channel.find('item').map(
-                    displayItem
-                ).get()
-            );
-        }
-
-        function displayItem() {
-            var me = $(this);
-            var item = $('<div />');
-            item.append(
-                $('<h2 />').text(me.find('title').text())
-            ).append(
-                $('<div />').html(me.find('description').each(
-                    createDescription
-                ).html())
-            ).append(
-                me.find('[url]').map(
-                    createImage
-                ).get()
-            );
-            return item;
-        }
-
-        function createDescription() {
-            $(this).find('a').each(function() {
-                var me = $(this);
-                me.attr('href', "http://www.bbc.co.uk" + me.attr('href'));
-                me.attr('target', '_blank');
-            });
-        }
-
-        function createImage() {
-            var thumbnail = $(this);
-            var img = $('<img />');
-            img.css({
-                width: thumbnail.attr('width'),
-                height: thumbnail.attr('height')
-            });
-            img[0].src = thumbnail.attr('url');
-            return img;
-        }
-
+        
     </script>
 </head>
 

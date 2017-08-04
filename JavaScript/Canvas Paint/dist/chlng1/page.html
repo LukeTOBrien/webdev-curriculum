@@ -29,14 +29,14 @@
             brushType: "circle"
         };
         var paintFunctions = {
-            circle : function (pos) {
+            "circle": function (pos) {
                 g.fillStyle = options.brushColour;
                 g.beginPath();
                 g.arc(pos.x, pos.y, options.brushSize, 0, 2 * Math.PI);
                 g.closePath();
                 g.fill();
             },
-            square : function (x, y) {
+            "square": function (x, y) {
                 var halfSize = options.brushSize / 2;
                 g.fillStyle = options.brushColour;
                 g.fillRect(pos.x - halfSize, pos.y - halfSize, options.brushSize, options.brushSize);
@@ -69,10 +69,12 @@
         }
 
         function setupOptions() {
+            document.getElementById('clear')
+                .onclick = clear;
             document.getElementById('brush-size')
-                .onchange = (e) => options.brushSize = e.target.value;
+                .onchange = setBrushSize;
             document.getElementById('brush-type')
-                .onchange = (e) => options.brushType = e.target.value;
+                .onchange = setBrushType;
 
             setupColours();
         }
@@ -83,9 +85,14 @@
                 var div = document.createElement('div');
                 div.className = 'brush-colour';
                 div.style.backgroundColor = colour;
-                div.onclick = () => options.brushColour = colour;
+                div.onclick = () => setBrushColour(colour);
                 container.appendChild(div);
             });
+        }
+
+        function clear() {
+            g.fillStyle = options.brushColour;
+            g.fillRect(0, 0, canvasSize.width, canvasSize.height);
         }
 
         function setBrushSize() {
@@ -127,10 +134,11 @@
 
 <body onload="load()">
     <div id="options-container">
+        <button id="clear">Clear</button>
         <input id="brush-size" placeholder="Brush size..." />
         <select id="brush-type">
-                <option value="circle">&#25EF;</option>
-                <option value="square">&#25FB;</option>
+                <option value="circle">&#9679</option>
+                <option value="square">&#9632</option>
             </select>
         <div id="colours-container">
 

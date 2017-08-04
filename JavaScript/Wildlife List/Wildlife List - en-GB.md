@@ -40,19 +40,20 @@ Once you do, you will see something like this:
 <rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
     <channel>
         <title>BBC Nature - Latest Wildlife</title>
-        <link>http://www.bbc.co.uk/nature/wildlife/by/latest</link>
+        <link>...</link>
         <description>
            ...
         </description>
         <language>en-gb</language>
         <image>
             <title>BBC Nature - Latest Wildlife</title>
-            <url>http://www.bbc.co.uk/nature/apscss/life/aps/images/wildlife.jpg</url>
-            <link>http://www.bbc.co.uk/nature/wildlife/by/latest</link>
+            <url>...</url>
+            <link>...</link>
         </image>
         <item>
             <title>Peregrine falcon</title>
             ...
+            <media:thumbnail width="146" height="82" url="..."/>
     </item>
     </channel>
 </rss>
@@ -232,13 +233,200 @@ Phew there is an aweful lot to learn in this lesson, if you are confussed about 
 ## Challenge 1 - Display the data
 
 It this challenge we are going to use the magic power of __jQuery__.<br>
-Unfortunatly this challenge is also going to be quite hard, so follow closely.
+Unfortunatly this challenge is also going to be quite hard, so take your time and look closely at the functions that we use.
+
+### Main output function
+
+Currently our `displayData` function is very simple, all we do here is display the data in the console window.<br>
+What we would really like to do is display the data on the page.<br>
+Let's modify our function a little:
+
+```JavaScript
+function displayData(data) {
+    console.log(data);
+
+    var output = $('#output');
+    var channel = $(data).find('channel');
+    outputChannel(channel, output);
+}
+```
+
+So here you can see that after we log the data to the console we have added three more statements:
+1) We are using the special __jQuery__ dollar (`$`) function to get the output `div` and storing it in a varible, remember the `div` has an `id` of output (`id="output"`) and that is why we are using the hash (`#`) here.
+2) We are using the special `$` function again, but this time we are passing the `data` varible when we call it. We are doing this so that the `data` varible is wrapped into a special __jQuery__ object.<br>
+Wrapping `data` into a __jQuery__ object then allows use to use other function that we couldn't normally use, in this case we can use the function __find__ to find the `channel` section of the `data`, which we are assigning to a varible.
+3) Lastly we are callin a new function that we have not written yet, this function this function will display the `channel` section of our data to the `output` div on our page.
+
+Let's create the `outputChannel` function now
+
+### `outputChannel` function
+
+This function will take two parameters, first the `channel` section or our data and scound is the `output` div on our page.<br>
+We then want to do three things:
+
+1) Add the title to the `output`.
+2) Add the description to the `output`.
+3) Add all the `item` sections from the `channel` to the `output`.
+
+Look at the following function very closely and see if you can workout what is happening:
+
+```JavaScript
+function outputChannel(channel, output) {
+    output.append(
+        $('<h1 />').text(channel.find('title:first').text())
+    )
+    .append(
+        channel.find('description:first').each(
+            buildDescription
+        ).html()
+    )
+    .append(
+        outputItems(channel)
+    );
+}
+```
+
+We are appending (adding) three things to our `output`, you can notice here that there is only one statement (one semi-colon `;`), that is because we are calling each function one after the other, calling functions this way is called function __chaining__.
+
+1) The first thing we are appending is a new heading element (`<h1 />`), we are setting it's text to that of the first `title` in our `channel`.
+2) The second thing we are adding is the whole HTML of the first `description` element.<br>
+But remember that the data returned from the __Web Server__ is XML not HTML, so we have to call another function `buildDescription` that will build the HTML that we need.
+3) Lastly we appending all the `item` elements from our `channel` with another function that we will need the create called `outputItems`.
+
+So let's now create the functions that we need, first is the `buildDescription` function.
+
+> __Note:__ You can learn about all the functions we have used by reading the following pages:
+> [append](http://api.jquery.com/append/)
+> [text](http://api.jquery.com/text/)
+> [find](http://api.jquery.com/find/)
+> [each](http://api.jquery.com/each/)
+> [html](http://api.jquery.com/html/)
+
+
+#### `buildDescription` function
+
+```JavaScript
+function buildDescription() {
+    $(this).find('a').each(function() {
+        var me = $(this);
+        me.attr('href', "http://www.bbc.co.uk" + me.attr('href'));
+        me.attr('target', '_blank');
+    });
+}
+```
+
+If you remember, the reason why we need this function is we need to change the element a little bit to make it exactly what we want.<br>
+What  we want to do is actually a very minour change, we only need to change the anchor `<a>` elements so that they point to the right place and open is a new blank window.
+
+Take a close look at this function and see if you can work out what is going on.
+
+There is only one stement (semi-colon `;`) here again, but let's take the functions one by one:
+1) Firstly we are wrapping the specail keyword `this` into a __jQuery__ object by calling the dollor (`$`) function.<br>
+_Remember:_ The `this` keyword is a varible and here it is the `<description>` element we got in our `outputChannel` function by using the code `find('description:first')`.
+2) We are finding all of the anchor (`<a>`) elements inside the `<description>`.
+3) Lastly, for each of the anchor element we are calling a function to modify it.
+
+Let's take a look at the function we use to modify the anchor element.<br>
+You can notice in this function the there are three statement (three `;`), but actually it could be reduced to one using __chaining__.<br>
+Can you guess what is happening in this function? what would the code look like if it where chained together?
+Let's take the three statements as they are and go over what they all do.
+
+1) Firstly we are wrapping the specail keyword `this` into a __jQuery__ object by calling the dollor (`$`) function.<br>
+_Remember:_ The `this` keyword is a varible and here it is the `<a>` element we got in our `outputChannel` function by using the code `find('a')`.
+2) Then we are using the `attr` function to change the `href` attribute, we do not want to change it compleatly, only add a __URL__ to the begining, so we add the existing `href` attribute to the end of the __URL__ with the code `+ me.attr('href')`.
+3) Lastly we want to add a new `target` attribte to our element, this is so that when we cllick on the link it will open in a blank window.
+
+> __Note:__ You can read more about the [attr function here](http://api.jquery.com/attr/)
+
+Now we have created the function to build the description, let's create the next function.
+
+### `outputItems` function
+
+In this function we are going to output all of the `<item>` element of our `channel`.<br>
+
+Look closely at this function, see if you can work out what is happening:
+
+```JavaScript
+function outputItems(channel) {
+    return $('<div />').append(
+        channel.find('item').map(
+            createItem
+        ).get()
+    );
+}
+```
+
+In this function we are returning a new `<div></div>` element that we are adding all the `<item>` elements too.<br/>
+
+You might be a little confused by the __map__ function.<br/>
+This function takes every `item` we've found in the `channel` and then transforms it into something new using a function that we give it as a parameter, here we are giving it a function called `createItem` that we are going to create.<br/>
+Lastly we call the __get__ function so that we can get the array of HTML elements that can be appended.
+
+> __Note:__ You can read more about the [map function here](http://api.jquery.com/map/)
+> __Also note:__ You can read more about the [get function here](http://api.jquery.com/get/)
+
+Because `<item>` is not a HTML element we are creating the new function that will create the HTML and transform the `<item>`.<br/>
+
+Let's look at the `createItem` function.
+
+#### The `createItem` function
+
+So if we remember, we are calling this function for each `<item>` element that we find, therefore the __this__ keyword is the `<item>` element thatwe are currently dealing with.<br/>
+Okay, so we know what __this__ is, let's see if we can work out what the rest of the code is doing:
+
+```JavaScript
+function createItem() {
+    var me = $(this);
+    return $('<div />')
+        .append(
+            $('<h2 />').text(me.find('title').text())
+        )
+        .append(
+            $('<div />').html(
+                me.find('description').each(
+                    buildDescription
+                ).html()
+            )
+        )
+        .append(
+            me.find('[url]').map(
+                createImage
+            ).get()
+        );
+}
+```
+
+This function is simular to the first `outputChannel` function that we created, can you see the simularities?<br/>
+In this function we are returning a `<div>` element which we are appending to three timess as you can see:<br>
+The first and second `append` function calls are the same as in `outputChannel`, we are adding the title and description in the same way.<br>
+The third `append` function call is a little different, we are finding all the elements we a `url` attribute (that means something like url="image") and then we calling anoth function that we will create called `createImage`.
+
+Let's take a look at the `createImage` function now:
+
+#### `createImage` function
+
+Remember that we are callind our function for earch element that has a `url` attribute.<br>
+So tht means that the __this__ varible has a value that looks something like this:
+
+```XML
+<media:thumbnail width="146" height="82" url="..."/>
+```
+
+So that looks simple to understand
+
+```JavaScript
+function createImage() {
+    var me = $(this);
+    var img = $('<img />');
+    img.css({
+        width: me.attr('width'),
+        height: me.attr('height')
+    });
+    img[0].src = me.attr('url');
+    return img;
+}
+```
 
 
 
-
-
-TODO: Network tab
-
-http://api.jquery.com/attr/
 
