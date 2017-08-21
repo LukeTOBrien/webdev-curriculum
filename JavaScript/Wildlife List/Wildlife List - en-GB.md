@@ -412,7 +412,9 @@ So tht means that the __this__ varible has a value that looks something like thi
 <media:thumbnail width="146" height="82" url="..."/>
 ```
 
-So that looks simple to understand
+So that looks simple to understand doesn't it?<br>
+The XML tag looks very simular to a HTML `<img>` tag, only we have a `url` attribute instead of a `src` attribute.<br>
+Here is the code for our `createImage` function, can you understand what it does?
 
 ```JavaScript
 function createImage() {
@@ -427,6 +429,15 @@ function createImage() {
 }
 ```
 
+In this function we are taking the media XML element and assigning it to a new varible called `me`.<br>
+Then we are creating a new HTML image element which we are assigning to a new varible called `img`.<br>
+After this we are then setting the width and height CSS properties of the image by using the jQuery function `css` which we get  from the XML (`me`) using the `attr` function.<br>
+Lastly we set the `src` attribute by assigning it the value of the `url` attribute inside the XML.
+
+## Finnaly done!
+
+Phew what a good job.<br>
+Now that we are finnaly done, you can save and relax
 
 
 

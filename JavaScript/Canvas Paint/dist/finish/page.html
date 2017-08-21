@@ -19,8 +19,8 @@
         var offset;
         var g;
         var canvasSize = {
-            width : 800,
-            height : 600
+            width: 800,
+            height: 600
         };
         var colours = ['red', 'chartreuse', 'blue', 'white', 'black'];
         var options = {
@@ -29,25 +29,18 @@
             brushType: "circle"
         };
         var paintFunctions = {
-            circle : function (pos) {
+            circle: function (pos) {
                 g.fillStyle = options.brushColour;
                 g.beginPath();
                 g.arc(pos.x, pos.y, options.brushSize, 0, 2 * Math.PI);
                 g.closePath();
                 g.fill();
             },
-            square : function (x, y) {
+            square: function (pos) {
                 var halfSize = options.brushSize / 2;
                 g.fillStyle = options.brushColour;
                 g.fillRect(pos.x - halfSize, pos.y - halfSize, options.brushSize, options.brushSize);
             }
-        }
-
-        function getOffset(x, y) {
-            return {
-                x: x - offset.x,
-                y: y - offset.y
-            };
         }
 
         function load() {
@@ -70,9 +63,9 @@
 
         function setupOptions() {
             document.getElementById('brush-size')
-                .onchange = (e) => options.brushSize = e.target.value;
+                .onchange = setBrushSize;
             document.getElementById('brush-type')
-                .onchange = (e) => options.brushType = e.target.value;
+                .onchange = setBrushType;
 
             setupColours();
         }
@@ -83,7 +76,7 @@
                 var div = document.createElement('div');
                 div.className = 'brush-colour';
                 div.style.backgroundColor = colour;
-                div.onclick = () => options.brushColour = colour;
+                div.onclick = () => setBrushColour(colour);
                 container.appendChild(div);
             });
         }
@@ -122,6 +115,13 @@
                 );
             }
         }
+
+        function getOffset(x, y) {
+            return {
+                x: x - offset.x,
+                y: y - offset.y
+            };
+        }
     </script>
 </head>
 
@@ -129,8 +129,8 @@
     <div id="options-container">
         <input id="brush-size" placeholder="Brush size..." />
         <select id="brush-type">
-                <option value="circle">&#25EF;</option>
-                <option value="square">&#25FB;</option>
+                <option value="circle">&25EF;</option>
+                <option value="square">&25FB;</option>
             </select>
         <div id="colours-container">
 
