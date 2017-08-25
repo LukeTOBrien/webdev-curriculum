@@ -9,7 +9,11 @@ stylesheet: web
 
 # Introduction { .intro}
 
-In this lesson we will create a painting application using JavaScript and the `<canvas>` HTML5 element
+In this lesson we will create a painting application using JavaScript and the `<canvas>` HTML5 element.<br>
+We will be able to use our mouse as a paint brush and draw on the `<canvas>`, the things that we want the application to be able to do are:
+1) Be able to change the brush size.
+2) Be able to change the brush type.
+3) Be able to change the brush colour.
 
 # Creating our basic page
 
@@ -24,18 +28,41 @@ Let's create our basic page:
 </html>
 ```
 
-## Reference Google Maps
+## Add the `<canvas>` element
 
-The first thing we have to do it to add a `<script>` at the top the references the Google Maps library.<br>
-At the top of your page, inside the `<head>`, place the following code:
+We need to have something to draw upon, so let's add a `<canvas>` element inside our `<body>`:
 
 ```HTML
-<script src="https://maps.googleapis.com/maps/api/js"></script>
+<canvas id="canvas">
+
+</canvas>
 ```
 
-Here we are saying that we want to include a new script with it's source at the Google Maps website.<br>
+Notice that we have giving our `<canvas>` a nice sencible id.
 
-> If you are curious, API stands for __Application Programming Interface__
+Let's not forget the three requirements that we have..<br>
+We need to be able to change a few things about the brush, these are called **options** so let's add a cotainer `<div>` for our options:
+
+```HTML
+<div id="options-container">
+</div>
+```
+
+Now let's go through our requirements one by one and add some more HTML markup.
+
+## 1) Brush size
+
+Okay so the brush size will be a number, so let's add a text box that will allow use to type in the brush size:
+
+```HTML
+<input id="brush-size" placeholder="Brush size..." />
+```
+
+## 2) Brush type
+
+So what is the Brush Type?.<br>
+Well let's keep it simple, we are only going to have two different brush types: **Square** and **Circle**.<br>
+The best way to be able to choose between the two different types is with a `<select>` element.
 
 ## `load` event and container
 
